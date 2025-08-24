@@ -9,6 +9,25 @@ def generate_random_number_medium():
 def generate_random_number_hard():
     return random.randint(1, 500)
 
+def gra():
+    licznik_prob = 1
+    user = None
+    while user != generowana:
+        try:
+            user = int(input('Twoja Odpowiedz:'))
+            if user == generowana:
+                print(f'🎉 Gratulacje!!!! Wygrałeś w {licznik_prob} próbach!')
+                break
+            elif user < generowana:
+                print('Liczba jest wyższa!')
+                print('Sprobuj ponownie!')
+                licznik_prob = licznik_prob + 1
+            elif user > generowana:
+                print('Liczba jest niższa!')
+                print('Sprobuj ponownie!')
+                licznik_prob = licznik_prob + 1
+        except ValueError:
+            print('❌Niepoprawny Format Odpowiedzi')
 
 print('Wybierz poziom trudnosci!')
 poziom = input('1 - łatwy , 2 - średni , 3 - trudny')
@@ -24,23 +43,4 @@ elif poziom == '3':
 print('Została wygenerowana randomowa liczba!')
 print('Zgadnij liczbe od 0 do ' + str(x) + '!')
 
-user = None
-licznik_prob = 0
-
-while user != generowana:
-    try:
-        user = int(input('Twoja Odpowiedz:'))
-        if user == generowana:
-            print(f'🎉 Gratulacje!!!! Wygrałeś w {licznik_prob} próbach!')
-        elif user < generowana:
-            print('Liczba jest wyższa!')
-            print('Sprobuj ponownie!')
-            licznik_prob = licznik_prob + 1
-        elif user > generowana:
-            print('Liczba jest niższa!')
-            print('Sprobuj ponownie!')
-            licznik_prob = licznik_prob + 1
-    except ValueError:
-        print('❌Niepoprawny Format Odpowiedzi')
-else:
-    break
+gra()
