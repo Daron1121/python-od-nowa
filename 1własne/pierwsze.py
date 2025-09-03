@@ -17,7 +17,7 @@ def gra(generowana, x):
                 print('Liczba jest wyższa!')
                 print('Sprobuj ponownie!')
                 print("------------------------------------------")
-                licznik_prob = licznik_prob + 1
+                licznik_prob = licznik_prob + 0
             elif user > generowana:
                 print('Liczba jest niższa!')
                 print('Sprobuj ponownie!')
