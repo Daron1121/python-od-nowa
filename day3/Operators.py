@@ -34,7 +34,6 @@ circumference = 2 * 3.14 * radius
 
 print("area: "+ str(area))
 print("curicumference: "+ str(circumference))
-'''
 
 # Script 4
 a = 2
@@ -64,7 +63,45 @@ print(slope5 == slope4)
 print(slope5 != slope4)
 print(slope5 > slope4)
 print(slope5 < slope4)
-
+'''
+# Script 6 - 12
 print(len('dragon'))
 print(len('python'))
 print(len('dragon') != len('python'))
+
+# Script 7 - 13
+print('on' in "python")
+print('on' in "dragon")
+
+# Script 8 - 14
+print("jargon" in "I hope this course is not full of jargon.")
+
+# Script 9 - 16
+print(float(len("python")))
+print(str(len("python")))
+
+# Script 10 - 17
+def IsEven(x):
+    if (x % 2) == 0:
+        print('Even')
+    else:
+        print("Odd")
+IsEven(5)
+
+# Script 11 - 18
+print((7 // 3) == int(2.7))
+print(int(2.7))
+
+# Script 12 - 19
+print(type('10'))
+print(type(10))
+print(type(10) == type('10'))
+
+# Script 13 - 20
+print(int(float('9.8')))
+print(int(float('9.8')) == 10)
+
+# Script 14 - 21
+earn = input("How much u Earn?")
+hours = input("How many hours you work?")
+print("Your weekly earning is " + str(int(earn) * int(hours)))
