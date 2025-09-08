@@ -106,10 +106,12 @@ earn = input("How much u Earn?")
 hours = input("How many hours you work?")
 print("Your weekly earning is " + str(int(earn) * int(hours)))
 
+# Script 15 - 22
 years = input("how many years your lived:")
 y_to_sec = int(years) * 365 * 24 * 60 * 60
 print(y_to_sec)
 
+# Script 15 - 23
 print("n  1  n  n^2  n^3")
 for n in range(1, 6):
     print(n, 1, n, n**2, n**3)
