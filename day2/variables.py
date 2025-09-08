@@ -48,4 +48,8 @@ area_of_circle = 3.14*(r**2)
 ciurcum_of_circle = (3.14)*r*2
 
 r2 = input('Whats is radius of circle?')
-area_of_circle_imput = 3.14*(r2**2)
+area_of_circle_imput = 3.14*(int(r2)**2)
+print(area_of_circle_imput)
+
+NoneType = None
+print(type(NoneType))

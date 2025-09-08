@@ -30,30 +30,5 @@ Exercise of Day 4
 #Ex 1
 print('Thirty ' + 'Days ' + 'Of ' + 'Python')
 
-#Ex 2
+#Ex 1
 print('Coding ' + 'for ' + 'all')
-
-#Ex 3 - 10
-company = "Coding For All"
-
-print(company)
-
-print(len(company))
-
-print(company.upper())
-
-print(company.lower())
-
-print(company.capitalize())
-print(company.title())
-print(company.swapcase())
-
-print(company[:6])
-#Lub
-first_space_index = company.find(" ")
-print(company[first_space_index + 1:])
-
-
-print(company.index('Coding'))
-print(company.find('Coding'))
-
