@@ -100,12 +100,14 @@ print('You cannot end a sentence with because because because is a conjunction'.
 print('You cannot end a sentence with because because because is a conjunction'.index('because'))
 print('You cannot end a sentence with because because because is a conjunction'.rindex('because'))
 
-#Ex 25 - ?
+#Ex 25
+print("You cannot end a sentence with because because because is a conjunction".replace("because because because", ""))
 
 #Ex 26
 print('You cannot end a sentence with because because because is a conjunction'.find('because'))
 
-#Ex 27 - ? to samo co 25
+#Ex 27
+print("You cannot end a sentence with because because because is a conjunction".replace("because because because", ""))
 
 #Ex 28, 29
 print(company.startswith('Coding'))
@@ -120,6 +122,9 @@ print('30DaysOfPython'.isidentifier())
 print('thirty_days_of_python'.isidentifier())
 
 #Ex 32
+libraries = ['Django', 'Flask', 'Bottle', 'Pyramid', 'Falcon']
+result = '# '.join(libraries)
+print(result)
 
 #Ex 33
 print('I am enjoying this challenge.\nI just wonder what is next.')
@@ -132,6 +137,7 @@ radius = 10
 area = 3.14 * radius ** 2
 print(f'The area of a circle with radius {radius} is {int(area)} meters square.')
 
+#Ex 36
 print(f"""
 8 + 6 = {8 + 6}
 8 - 6 = {8 - 6}
