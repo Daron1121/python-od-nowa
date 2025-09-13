@@ -146,3 +146,45 @@ print(f"""
 8 % 6 = {8 % 6}
 8 // 6 = {8 // 6}
 8 ** 6 = {8 ** 6}""")
+
+'''
+========================================
+DwB - practise
+----------------------------------------
+'''
+
+day = "2026/05/10"
+transf_day = day.replace('/', '-')
+print(transf_day)
+
+phone_num = "+49 (176) 123-4567"
+transf_num = phone_num.replace('+49', '0049').replace('(','').replace(')','').replace('-','').replace(' ','')
+print(transf_num)
+
+casv_file = "123,max,USA,1970-10-05,M"
+print(casv_file.split(","))
+
+'''
+----------------------------------------
+Indexing & Slicing
+----------------------------------------
+'''
+text = "Python"
+print(text[0])
+print(text[-1])
+print(text[3])
+
+date = "2025-09-12"
+
+# Extract the year
+print(date[0:4])
+
+# Extract the month
+print(date[5:7])
+
+# Extract the day
+print(date[-2:])
+
+to_clean = "968-Maria, ( D@t@ Engineer );; 27y  "
+converted = to_clean.replace("968-", 'name: ').replace('D@t@', 'data').replace('(', '| role:').replace(')', '').replace(',', '').replace(';;', '| age:').replace('y', '').strip().lower()
+print(converted)
