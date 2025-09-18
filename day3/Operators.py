@@ -63,7 +63,7 @@ print(slope5 == slope4)
 print(slope5 != slope4)
 print(slope5 > slope4)
 print(slope5 < slope4)
-'''
+
 # Script 6 - 12
 print(len('dragon'))
 print(len('python'))
@@ -115,3 +115,30 @@ print(y_to_sec)
 print("n  1  n  n^2  n^3")
 for n in range(1, 6):
     print(n, 1, n, n**2, n**3)
+
+'''
+#Logical operators
+is_logged = False
+is_Guest = True
+is_banned = True
+print(f"Do you have access: {(is_logged or is_Guest) and not is_banned}")
+
+
+name = ''
+age = 19
+print(name != '' and age>=18)
+
+password = 'abcdefghij'
+print(f"Does password have at least 8 characters: {len(password) >= 8}")
+
+email = 'costam@gmail.com'
+print(email != None and '@' in email and email[-4:] == '.com')
+
+username = 'Daron1'
+print(type(username) == str and username != None and len(username) > 5)
+
+is_mod = False
+is_admin = False
+is_banned = False
+verified_email = True
+print((is_admin or is_mod) and (is_banned or verified_email))
