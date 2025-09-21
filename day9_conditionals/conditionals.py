@@ -15,7 +15,7 @@ elif score >= 30 or project:
 else:
     print("F")
 
-#Exercise - Data With Baara
+#Exercise 1 - Data With Baara
 '''
 Validate the Quality and Correctness of Email Values
 '''
@@ -46,9 +46,26 @@ elif not (email[0].isalnum() and email[-1].isalnum()):
 else:
     print("Your email is valid")
 
-
-
+#Exercise 2 - Data With Baara
 '''
-if len(email) > 254:
-    print('Too long')
+Validate the Quality and Correctness of Password Values
 '''
+password = 'abcDefgh1j'
+password = password.strip()
+
+if password == "":
+    print("Your password is empty!!")
+elif len(password) < 8:
+    print("Your password must contain at least 8 characters")
+elif password == email:
+    print("Your password cant be same as email")
+elif not any(char.isupper() for char in password):
+    print('Your password must contain a uppercase')
+elif not any(char.islower() for char in password):
+    print('Your password must contain a lowercase')
+elif password.find(' ') != -1:
+    print("Your password cant have spaces")
+elif not (password[0].isalnum() and password[-1].isalnum()):
+    print('Password must start with a letter or digit')
+else:
+    print('Your password is valid')
