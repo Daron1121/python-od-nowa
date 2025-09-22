@@ -1,4 +1,4 @@
-score = 25
+score = 81
 project = True 
 if score >= 95 and project:
     print("A+")
@@ -14,6 +14,40 @@ elif score >= 30 or project:
     print("E")
 else:
     print("F")
+
+#Inline if (Ternary)
+ocena = "A" if score >= 90 else 'F'
+print(ocena)
+
+ocena2 = "A" if score >= 90 else "B" if score >= 80 else "F"
+print(ocena2)
+
+country = "United States"
+'''
+Normally:
+if country == "United States"
+elif
+elif ... etc.
+
+
+
+Better to use match case!!
+'''
+#Match-case
+match country:
+    case "United States":
+        print("US")
+    case "India":
+        print("IN")
+    case "Egipt":
+        print("EG")
+    case "Germany":
+        print("GE")
+    case _:
+        print("Unknown country")
+    
+
+
 
 #Exercise 1 - Data With Baara
 '''
@@ -70,7 +104,6 @@ elif not (password[0].isalnum() and password[-1].isalnum()):
 else:
     print('Your password is valid')
 
-'''
 print("-" * 50)
 #Exercises from 30DaysOfPython
 #LEVEL 1
@@ -133,7 +166,7 @@ if fruit not in fruits:
     print(fruits)
 else:
     print('That fruit already exist in the list')
-'''
+
 person={
     'first_name': 'Asabeneh',
     'last_name': 'Yetayeh',
