@@ -1,4 +1,4 @@
-[
+nowalista = [
     {
         "name": "Afghanistan",
         "capital": "Kabul",

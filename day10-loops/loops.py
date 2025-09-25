@@ -324,3 +324,24 @@ for i in range(n // 2):
     print(fruits)
 
 #todo Ex 3
+import sys, os
+
+base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+sys.path.append(base_dir)
+
+from countries_data import nowalista
+
+# i: What are the total number of languages in the data
+languages1 = []
+for iter in nowalista:
+    languages1 = languages1 + iter['languages']
+print(f"Number of languages in file: {len(set(languages1))}")
+# ii: Find the ten most spoken languages from the data
+liczenie = {}
+for lang in languages1:
+    if lang not in liczenie:
+        liczenie[lang] = 1
+    else:
+        liczenie[lang] += 1
+top_ten = sorted(liczenie.items(), key=lambda x: x[1], reverse=True)[:10]
+print(top_ten)
