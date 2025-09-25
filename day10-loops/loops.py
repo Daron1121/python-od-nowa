@@ -33,6 +33,21 @@ for number in numbers:
 print('outside the loop')
 
 #------------------------------------------------------------------------------------
+#* Data With Baara
+
+for item in (1,2,3,4,5):
+    print(f'round {item}')
+
+for seven in range(11):
+    print(f'7 x {seven} = {7 * seven}')
+
+days = ['Mon', 'Sun' , 'Wed' , 'Tue']
+weekends = ['Sat', 'Sun']
+for day in days:
+    if day in weekends:
+        continue
+    print(f"Workday: {day}")
+#------------------------------------------------------------------------------------
 #* Exercises: Day 10 30DaysOfPython
 #* Exercises: Level 1
 #Ex 1
@@ -301,9 +316,11 @@ for iter in countries:
     if 'land' in iter:
         print(iter)
 
-#Ex 2
+#todo Ex 2
 fruits = ['banana', 'orange', 'mango', 'lemon']
 n = len(fruits) # 4
 for i in range(n // 2): 
     fruits[i], fruits[n - 1 - i] = fruits[n - 1 - i], fruits[i]
     print(fruits)
+
+#todo Ex 3
