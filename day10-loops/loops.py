@@ -47,6 +47,43 @@ for day in days:
     if day in weekends:
         continue
     print(f"Workday: {day}")
+
+items = [1,3,4,7]
+for i in items:
+    if i % 2 != 0:
+        print('There are even numbers:', i)
+        break
+else:
+    print("No Even numbers")
+
+names = ['Kamara', 'Tuba', None, 'Mounika']
+
+for name in names:
+    if name is None:
+        print("Found a missing name")
+        break
+else:
+    print('All names are avaiable')
+
+files = ['data1.csv', 'report.pdf', 'report2.csv']
+for file in files:
+    if not file[-4:] != '.csv':
+        print(f'{file} is not an csv file!')
+        break
+else:
+    print('There are only csv files')
+
+file_list = ['report.csv', 'dat.xlsx', 'summary.docx', 'report.csv', 'data.csv']
+memory = []
+for plik in file_list:
+    if plik not in memory:
+        memory.append(plik)
+        print(memory)
+    else:
+        print('There are duplicates of file:', plik)
+        break
+else:
+    print('All files are unique!')
 #------------------------------------------------------------------------------------
 #* Exercises: Day 10 30DaysOfPython
 #* Exercises: Level 1
@@ -316,14 +353,14 @@ for iter in countries:
     if 'land' in iter:
         print(iter)
 
-#todo Ex 2
+#Ex 2
 fruits = ['banana', 'orange', 'mango', 'lemon']
 n = len(fruits) # 4
 for i in range(n // 2): 
     fruits[i], fruits[n - 1 - i] = fruits[n - 1 - i], fruits[i]
     print(fruits)
 
-#todo Ex 3
+#Ex 3
 import sys, os
 
 base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
