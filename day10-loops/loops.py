@@ -345,3 +345,9 @@ for lang in languages1:
         liczenie[lang] += 1
 top_ten = sorted(liczenie.items(), key=lambda x: x[1], reverse=True)[:10]
 print(top_ten)
+# iii: Find the 10 most populated countries in the world
+top_10 = {}
+for population in nowalista:
+    top_10.update({population['name']:population["population"]})
+top_10 = sorted(top_10.items(), key=lambda x: x[1], reverse=True)[:10]
+print(f'Top 10 most poppulated countries: {top_10}')
