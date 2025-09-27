@@ -84,6 +84,35 @@ for plik in file_list:
         break
 else:
     print('All files are unique!')
+
+
+
+for x in range(3):    # outer loop
+    for y in (1,2):   # inner loop
+        print(x,y)
+
+colors = ['Red', 'Green', 'Blue']
+sizes = ['S', 'M', 'L']
+
+for color in colors:
+    for size in sizes:
+        print(f'({color} - Size {size})')
+
+years = [2026, 2027]
+months = ['Jan', 'Feb']
+days = range(1,29)
+for year in years:
+    for month in months:
+        for day in days:
+            print(f'report_{day}_{month}_{year}.csv')
+
+
+tables = ['customers', 'orders', 'products', 'prices']
+columns = ['id', 'create_date']
+rows = []
+for table in tables:
+    for column in columns:
+        print(f'SELECT count(*) From {table} WHERE {column} IS NULL')
 #------------------------------------------------------------------------------------
 #* Exercises: Day 10 30DaysOfPython
 #* Exercises: Level 1
