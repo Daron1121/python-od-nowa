@@ -113,6 +113,28 @@ rows = []
 for table in tables:
     for column in columns:
         print(f'SELECT count(*) From {table} WHERE {column} IS NULL')
+
+count = 1
+while i <= 5:
+    print(i)
+    i += 1
+
+agreement = ''
+while agreement != 'yes':
+    agreement = input('Do you agree? (yes/no) ')
+    continue
+else:
+    print('Thank you')
+count = 3
+while True:
+    answer = input(f'Do you agree? You have {count} attempts left (yes/no):')
+    if answer == "yes":
+        print("Glad we are on the same page")
+        break
+    count -= 1
+    if count == 0:
+        print('3 strikes, you are out')
+        break
 #------------------------------------------------------------------------------------
 #* Exercises: Day 10 30DaysOfPython
 #* Exercises: Level 1
