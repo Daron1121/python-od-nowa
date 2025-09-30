@@ -142,3 +142,68 @@ def convert_celsius_to_fahrenheit(cel):
     F = (cel * 9/5) + 32
     return F
 print(convert_celsius_to_fahrenheit(0))
+
+#Ex 5
+def pora_roku(miesiac):
+    if miesiac in ['March', 'April', 'May']:
+        print('Its Spring!')
+    elif miesiac in ['June', 'July', 'August']:
+        print('Its Summer!')
+    elif miesiac in ['September', 'October', 'November']:
+        print('Its Autumn!')
+    else:
+        print('Its Winter!')
+miesiac_1 = 'March'
+pora_roku(miesiac_1)
+
+#Ex 6
+def calculate_slope(x1, y1,x2,y2):
+    slope = (y2 - y1) / (x2 - x1)
+    return slope
+print(calculate_slope(9,6,5,7))
+
+import cmath
+#Ex 7
+def solve_quadratic_eqn(a,b,c):
+    D = b**2 - 4*a*c
+    x1 = (-b - cmath.sqrt(D)) / (2 * a)
+    x2 = (-b + cmath.sqrt(D)) / (2 * a)
+    return x1,x2
+print(solve_quadratic_eqn(2,5,2))
+
+#Ex 8
+def print_list(lista):
+    for iter in lista:
+        print(iter)
+print_list(['a','b','c','d'])
+
+#todo Ex 9
+def reverse_list(array):
+    pass
+
+#Ex 10
+def capitalize_list_items(lista):
+    for item in lista:
+        print(item.upper())
+capitalize_list_items(['a','b','c','d'])
+
+# Ex 11
+def add_item(list, do_dodania):
+    return list.append(do_dodania)
+food_staff = ['Potato', 'Tomato', 'Mango', 'Milk']
+print(add_item(food_staff, 'Meat'))    
+print(food_staff)
+
+#Ex 12
+def remove_item(jaka_lista, co):
+    return jaka_lista.remove(co)
+food_staff = ['Potato', 'Tomato', 'Mango', 'Milk']
+print(remove_item(food_staff, 'Mango'))  # ['Potato', 'Tomato', 'Milk'];
+print(food_staff)
+
+#Ex 13
+def sum_of_numbers(number):
+    return sum(range(number + 1))
+print(sum_of_numbers(5))
+print(sum_of_numbers(10))
+print(sum_of_numbers(100))
