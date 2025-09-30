@@ -5,8 +5,33 @@ print('Number of countries:', len(countries))
 
 '''
 --------------------------------
+Data with baara
+--------------------------------
+'''
+# 1 - How to create a list
+empty = []
+print(empty)
+print(type(empty))
+empty = list()
+
+letters = ['a', 'b', 'c', 'd']
+print(empty)
+print(type(empty))
+print(letters)
+print(type(letters))
+
+letters2 = list('Python')
+print(letters2)
+
+matrix = [['a', 'b', 'c'], ['d', 'e', 'f']]
+print(matrix)
+
+#-------------------------------
+'''
+--------------------------------
 Exercises
 --------------------------------
+'''
 '''
 #Ex Level 1 1-3
 print('-' * 30)
@@ -323,3 +348,4 @@ print("Second half:", second)
 c2 = ['China', 'Russia', 'USA', 'Finland', 'Sweden', 'Norway', 'Denmark']
 China, Russia, USA, *Scandic = c2
 print(Scandic)
+'''
