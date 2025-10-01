@@ -177,9 +177,16 @@ def print_list(lista):
         print(iter)
 print_list(['a','b','c','d'])
 
-#todo Ex 9
-def reverse_list(array):
-    pass
+#Ex 9
+def reverse_list(arr):
+    reversed_arr = []
+    for i in range(len(arr) - 1, -1, -1):  # loop from last index down to 0
+        reversed_arr.append(arr[i])
+    return reversed_arr
+print(reverse_list([1, 2, 3, 4, 5]))
+# [5, 4, 3, 2, 1]
+print(reverse_list(["A", "B", "C"]))
+# ["C", "B", "A"]
 
 #Ex 10
 def capitalize_list_items(lista):
@@ -207,3 +214,73 @@ def sum_of_numbers(number):
 print(sum_of_numbers(5))
 print(sum_of_numbers(10))
 print(sum_of_numbers(100))
+
+# Ex 14
+def sum_of_odds(number):
+    sum = 0
+    for odd in range(number + 1):
+        if odd % 2 == 0:
+            sum += odd
+    return sum
+print(sum_of_odds(5))
+
+# Ex 15
+def sum_of_even(number):
+    sum = 0
+    for even in range(number + 1):
+        if even % 2 != 0:
+            sum += even
+    return sum
+print(sum_of_even(5))
+
+#* LEVEL 2
+# Ex 1
+def evens_and_odds(numbers):
+    even = 0
+    odds = 0
+    for number in range(numbers + 1):
+        if number % 2 == 0:
+            odds += 1
+        else:
+            even += 1
+    print(f"The number of odds are {odds}") 
+    print(f"The number of even are {even}") 
+evens_and_odds(100)
+
+# Ex 1
+def factorial(factor):
+    output1 = 1
+    for number in range(1, factor + 1):
+        output1 *= number
+    return output1
+print(factorial(8))
+
+# Ex 2
+def is_empty(parameter):
+    pass
+
+# Ex 3
+def calculate_mean(lista):
+    suma = 0
+    for number in lista:
+        suma += number
+    lenght = 0
+    for index in lista:
+        lenght += 1
+    return suma / lenght
+print(calculate_mean([5,4,3,2,1]))
+
+def calculate_median(lista):
+    for _ in range(len(lista) - 1):            
+        for i in range(len(lista) - 1):     
+            if lista[i] > lista[i + 1]:
+                lista[i], lista[i + 1] = lista[i + 1], lista[i]
+    n = len(lista)
+    mid = n // 2
+
+    if n % 2 != 0:
+        return lista[mid]
+    else:
+        return ((lista[mid - 1] + lista[mid]) / 2) 
+
+print(calculate_median([5,4,3,2,1,6]))
