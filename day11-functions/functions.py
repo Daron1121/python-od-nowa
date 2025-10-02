@@ -284,3 +284,23 @@ def calculate_median(lista):
         return ((lista[mid - 1] + lista[mid]) / 2) 
 
 print(calculate_median([5,4,3,2,1,6]))
+
+def calculate_mode(lista):
+    counts = {}
+    for iter in lista:
+        if iter not in counts:
+            counts[iter] = 1
+        else:
+            counts[iter] += 1
+    sorted_dict = dict(sorted(counts.items(), key=lambda item: item[1]))
+    a = sorted_dict.popitem()
+    return f"Item {a[0]} is mode of this list , and it occured {a[1]} time(s)"
+print(calculate_mode([5,2,6,1,1,1,3,4,3,2,6,1,6]))
+
+def calculate_range(lista):
+    for _ in range(len(lista) - 1):
+        for iter in range(len(lista) - 1):
+            if lista[iter] > lista[iter + 1]:
+                lista[iter] , lista[iter + 1] = lista[iter + 1] , lista[iter]
+    return f"The range is euqal {lista[-1] - lista[0]}"
+print(calculate_range([5,2,6,1,1,1,3,4,3,2,6,1,6]))
