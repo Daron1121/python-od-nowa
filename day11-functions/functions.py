@@ -184,9 +184,7 @@ def reverse_list(arr):
         reversed_arr.append(arr[i])
     return reversed_arr
 print(reverse_list([1, 2, 3, 4, 5]))
-# [5, 4, 3, 2, 1]
 print(reverse_list(["A", "B", "C"]))
-# ["C", "B", "A"]
 
 #Ex 10
 def capitalize_list_items(lista):
@@ -304,3 +302,107 @@ def calculate_range(lista):
                 lista[iter] , lista[iter + 1] = lista[iter + 1] , lista[iter]
     return f"The range is euqal {lista[-1] - lista[0]}"
 print(calculate_range([5,2,6,1,1,1,3,4,3,2,6,1,6]))
+
+def calculate_variance(lista):
+    # 1 step - calculate mean
+    mean = 0
+    for i in lista:
+        mean += i
+    mean = round(mean/len(lista) , 2)
+    
+    # 2 step - calculate devitation
+    devitation = {}
+    for iter in lista:
+        devitation[iter] = round((iter - mean),2)
+    print(devitation) 
+
+    devitation = devitation.values()
+    devitation = list(devitation)
+    # 3 step - Square the Deviations
+    sq_deva = []
+    for iter in devitation:
+        iter = round(iter ** 2,2)
+        sq_deva.append(iter)
+    print(sq_deva)
+
+    # 4 step - Sum the Squared Deviations
+    sum_of_sqrs = 0
+    for iter in sq_deva:
+        sum_of_sqrs += iter
+
+
+    # 5 step - Sample Variance !Last
+    # Divide the sum of squares by the number of data points minus one (n - 1)
+    s_variance = sum_of_sqrs/len(lista) - 1
+    return f"The sample variance of this list is: {s_variance}"
+print(calculate_variance([3,2,6,1,1,1,3,4,3,2,6,1,6]))
+
+import cmath
+def calculate_std(lista):
+    # 1 step - calculate mean
+    mean = 0
+    for i in lista:
+        mean += i
+    mean = round(mean/len(lista) , 2)
+    
+    # 2 step - calculate devitation
+    devitation = {}
+    for iter in lista:
+        devitation[iter] = round((iter - mean),2)
+    print(devitation) 
+
+    devitation = devitation.values()
+    devitation = list(devitation)
+    # 3 step - Square the Deviations
+    sq_deva = []
+    for iter in devitation:
+        iter = round(iter ** 2,2)
+        sq_deva.append(iter)
+    print(sq_deva)
+
+    # 4 step - Sum the Squared Deviations
+    sum_of_sqrs = 0
+    for iter in sq_deva:
+        sum_of_sqrs += iter
+
+
+    # 5 step - Sample Variance !Last
+    # Divide the sum of squares by the number of data points minus one (n - 1)
+    s_variance = sum_of_sqrs/len(lista) - 1
+
+    # 6 setp - Find the Standard Deviation
+    return cmath.sqrt(s_variance)
+print(calculate_std([3,2,6,1,1,1,3,4,3,2,6,1,6]))
+
+#* LEVEL 3
+# Ex 1
+def is_prime(number):
+    dzielniki = []
+    for i in range(1, number + 1):
+        if number % i == 0:
+            dzielniki.append(i)
+    if len(dzielniki) != 2:
+        return 'Not Prime Number'
+    else:
+        return "Prime Number"
+print(is_prime(9))
+
+#Ex 2 
+def check_list(lista):
+    for _ in range(len(lista) - 1):
+        for i in range(len(lista) - 1):
+            if lista[i] > lista[i+1]:
+                lista[i], lista[i+1] = lista[i+1], lista[i]
+    for i in range(len(lista) - 1):
+        if lista[i] == lista[i+1]:
+            return f'List {lista} has not only unique items'
+        else:
+            return f'List {lista} has only unique items'
+    print(lista)
+print(check_list([1,2,3,6,9,8]))
+
+#Ex 3
+
+#Ex 4
+
+#Ex 5
