@@ -23,9 +23,31 @@ print(type(letters))
 letters2 = list('Python')
 print(letters2)
 
-matrix = [['a', 'b', 'c'], ['d', 'e', 'f']]
-print(matrix)
+matrix1 = [['a', 'b', 'c'], ['d', 'e', 'f']]
+print(matrix1)
 
+# 2 - How to acces & read list
+lst = ['a', 'b', 'c', 'd']
+print(lst)
+print(lst[0])
+print(lst[-1])
+
+matrix2 = [['a', 'b', 'c'], ['d', 'e', 'f'],['h', 'i' ,'j']]
+print(matrix2)
+print(matrix2[-1])
+print(matrix2[-1][-1])
+print(matrix2[0][0])
+
+lst = ['a', 'b', 'c', 'd']
+print(lst)
+print(lst[:0])
+print(lst[:-1])
+print(lst[:])
+print(lst[1:3])
+matrix3 = [['a', 'b', 'c'], ['d', 'e', 'f'],['g', 'h' ,'i']]
+print(matrix3[1:])
+print(matrix3[-1][:2])
+print(matrix3[2:][:3])
 #-------------------------------
 '''
 --------------------------------
