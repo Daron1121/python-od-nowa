@@ -402,7 +402,54 @@ def check_list(lista):
 print(check_list([1,2,3,6,9,8]))
 
 #Ex 3
+def is_data_type(lista):
+    first_type = type(lista[0])
+    for item in lista:
+        if type(item) != first_type:
+            return "Not all items are the same data type!"
+    return "All items are the same data type!"
+print(is_data_type([1,2,3,6,9,8]))
 
-#Ex 4
+#todo Ex 4
+import keyword
 
+def is_valid_variable(name: str) -> bool:
+    """Check if the given string is a valid Python variable name."""
+    if not isinstance(name, str) or not name:
+        return False
+    if keyword.iskeyword(name):
+        return False
+    return name.isidentifier()
+print(is_valid_variable(''))
 #Ex 5
+#1
+import sys, os
+
+base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+sys.path.append(base_dir)
+
+from countries_data import nowalista
+def most_spoken_languages(lista):
+    languages = []
+    for iter in lista:
+        languages = languages + iter['languages']
+    liczenie = {}
+    for lang in languages:
+        if lang not in liczenie:
+            liczenie[lang] = 1
+        else:
+            liczenie[lang] += 1
+    top_ten = sorted(liczenie.items(), key=lambda x: x[1], reverse=True)[:10]
+    return top_ten
+print(most_spoken_languages(nowalista))
+
+#2
+def most_populated_countries(lista):
+    name_and_population = {}
+    for iter in lista:
+        population = iter['population']
+        name = iter['name']
+        name_and_population[name] = population
+    top_10 = sorted(name_and_population.items(), key=lambda x: x[1], reverse=True)[:10]
+    return top_10
+print(most_populated_countries(nowalista))
