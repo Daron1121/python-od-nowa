@@ -266,7 +266,7 @@ def calculate_mean(lista):
     for index in lista:
         lenght += 1
     return suma / lenght
-print(calculate_mean([5,4,3,2,1]))
+print(calculate_mean([20, 20, 4, 24, 25, 22, 26, 20, 23, 22, 26]))
 
 def calculate_median(lista):
     for _ in range(len(lista) - 1):            
@@ -281,7 +281,7 @@ def calculate_median(lista):
     else:
         return ((lista[mid - 1] + lista[mid]) / 2) 
 
-print(calculate_median([5,4,3,2,1,6]))
+print(calculate_median([20, 20, 4, 24, 25, 22, 26, 20, 23, 22, 26]))
 
 def calculate_mode(lista):
     counts = {}
@@ -372,7 +372,7 @@ def calculate_std(lista):
 
     # 6 setp - Find the Standard Deviation
     return cmath.sqrt(s_variance)
-print(calculate_std([3,2,6,1,1,1,3,4,3,2,6,1,6]))
+print(calculate_std([20, 20, 4, 24, 25, 22, 26, 20, 23, 22, 26]))
 
 #* LEVEL 3
 # Ex 1
@@ -410,7 +410,7 @@ def is_data_type(lista):
     return "All items are the same data type!"
 print(is_data_type([1,2,3,6,9,8]))
 
-#todo Ex 4
+#Ex 4
 import keyword
 
 def is_valid_variable(name: str) -> bool:
