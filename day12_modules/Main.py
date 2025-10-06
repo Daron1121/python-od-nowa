@@ -118,10 +118,8 @@ print(shuffle_list([20, 20, 4, 24, 25, 22, 26, 20, 23, 22, 26]))
 def arr_of_seven():
     arr = []
     while len(arr) < 7:
-        number = randint(0,9)
+        number = randint(0, 9)
         if number not in arr:
             arr.append(number)
-        else:
-            continue
     return arr
 print(arr_of_seven())
