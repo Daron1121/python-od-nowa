@@ -104,3 +104,24 @@ print(generate_colors('hexa', 3)) # ['#a3e12f','#03ed55','#eb3d2b']
 print(generate_colors('hexa', 1)) # ['#b334ef']
 print(generate_colors('rgb', 3))  # ['rgb(5, 55, 175','rgb(50, 105, 100','rgb(15, 26, 80'] 
 print(generate_colors('rgb', 1))  # ['rgb(33,79, 176)']
+
+#* Level 3
+#Ex 1
+import random 
+
+def shuffle_list(lista: list) -> list:
+    return random.sample(lista, len(lista))
+
+print(shuffle_list([20, 20, 4, 24, 25, 22, 26, 20, 23, 22, 26]))
+
+#Ex 2
+def arr_of_seven():
+    arr = []
+    while len(arr) < 7:
+        number = randint(0,9)
+        if number not in arr:
+            arr.append(number)
+        else:
+            continue
+    return arr
+print(arr_of_seven())
