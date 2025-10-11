@@ -136,7 +136,7 @@ numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 '''
 map - it change every iterable by called function 
 filter - it returns only values that check condition in function
-reduct - it returns a single value that represent the output of function in iterable
+reduce - it returns a single value that represent the output of function in iterable
 '''
 #Ex 2 Explain the difference between higher order function, closure and decorator
 '''
@@ -189,15 +189,39 @@ num_6_or_more_countries = list(filter(lambda country : country.startswith('E'), 
 print(num_6_or_more_countries)
 
 #Ex8 Chain two or more list iterators (eg. arr.map(callback).filter(callback).reduce(callback))
-
+result = reduce(
+    lambda acc, country: acc + [country] if 'LAND' in country else acc,
+    filter(lambda c: len(c) >= 6, map(lambda c: c.upper(), countries)),
+    []
+)
+print(result)
 #Ex9 Declare a function called get_string_lists which takes a list as a parameter and then returns a list containing only string items.
+def get_string_lists(lista):
+    nowa_l = list(map(lambda x: str(x), lista))
+    return nowa_l
+print(get_string_lists([3, 'dsc', True]))
 
 #Ex10 Use reduce to sum all the numbers in the numbers list.
+suma = reduce(lambda s , s2 : s + s2, numbers)
+print(suma)
 
 #Ex11 Use reduce to concatenate all the countries and to produce this sentence: Estonia, Finland, Sweden, Denmark, Norway, and Iceland are north European countries
+concating = reduce(lambda acc, country: f"{acc}, {country}" if country != countries[-1] else f"{acc}, and {country}",countries[1:],countries[0]) +'are north European countries'
+print(concating)
 
 #Ex12 Declare a function called categorize_countries that returns a list of countries with some common pattern (you can find the countries list in this repository as countries.js(eg 'land', 'ia', 'island', 'stan')).
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from countries import countries
 
+def categorize_countries(lista):
+    nowe = []
+    for country in lista:
+        if 'land' in country or 'ia' in country or 'island' in country or 'stan' in country :
+            nowe.append(country)
+    return nowe
+print(categorize_countries(countries))
 #Ex13 Create a function returning a dictionary, where keys stand for starting letters of countries and values are the number of country names starting with that letter.
 
 #Ex14 Declare a get_first_ten_countries function - it returns a list of first ten countries from the countries.js list in the data folder.
