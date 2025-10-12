@@ -222,8 +222,61 @@ def categorize_countries(lista):
             nowe.append(country)
     return nowe
 print(categorize_countries(countries))
+
 #Ex13 Create a function returning a dictionary, where keys stand for starting letters of countries and values are the number of country names starting with that letter.
+def names_of_country(countries):
+    dictio = {}
+    for country in countries:
+        first_letter = country[0].upper()
+        dictio[first_letter] = dictio.get(first_letter, 0) + 1
+    return dictio
+
+print(names_of_country(countries))
 
 #Ex14 Declare a get_first_ten_countries function - it returns a list of first ten countries from the countries.js list in the data folder.
+def get_first_ten_countries(lista):
+    return lista[:10]
+print(get_first_ten_countries(countries))
 
 #Ex15 Declare a get_last_ten_countries function that returns the last ten countries in the countries list.
+def get_last_ten_countries(lista):
+    return lista[-10:]
+print(get_last_ten_countries(countries))
+
+#* Exercises: Level 3
+#Ex 1Use the countries_data.py file and follow the tasks below:
+from countries_data import nowalista
+# Sort countries by name, by capital, by population
+from countries_data import nowalista
+
+# Sort countries by name, by capital, by population
+def sorting_function(countries: list):
+    # Sort by name
+    sorted_by_name = sorted(countries, key=lambda c: c["name"])
+
+    # Sort by capital
+    sorted_by_capital = sorted(countries, key=lambda c: c["capital"])
+
+    # Sort by population
+    sorted_by_population = sorted(countries, key=lambda c: c["population"], reverse=True)
+
+    return sorted_by_name, sorted_by_capital, sorted_by_population
+
+
+# Example usage:
+sorted_name, sorted_capital, sorted_population = sorting_function(nowalista)
+
+print("Sorted by name:")
+for c in sorted_name[:5]:
+    print(c["name"])
+
+print("\nSorted by capital:")
+for c in sorted_capital[:5]:
+    print(c["capital"])
+
+print("\nSorted by population (top 5):")
+for c in sorted_population[:5]:
+    print(f"{c['name']} — {c['population']}")
+
+# Sort out the ten most spoken languages by location.
+# Sort out the ten most populated countries.
