@@ -1,1 +1,0 @@
-   for dictio in nowalista:
