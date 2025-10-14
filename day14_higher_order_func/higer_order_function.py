@@ -247,23 +247,15 @@ print(get_last_ten_countries(countries))
 #Ex 1Use the countries_data.py file and follow the tasks below:
 from countries_data import nowalista
 # Sort countries by name, by capital, by population
-from countries_data import nowalista
-
-# Sort countries by name, by capital, by population
 def sorting_function(countries: list):
-    # Sort by name
     sorted_by_name = sorted(countries, key=lambda c: c["name"])
 
-    # Sort by capital
     sorted_by_capital = sorted(countries, key=lambda c: c["capital"])
 
-    # Sort by population
     sorted_by_population = sorted(countries, key=lambda c: c["population"], reverse=True)
 
     return sorted_by_name, sorted_by_capital, sorted_by_population
 
-
-# Example usage:
 sorted_name, sorted_capital, sorted_population = sorting_function(nowalista)
 
 print("Sorted by name:")
