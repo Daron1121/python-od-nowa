@@ -109,12 +109,101 @@ print(hmuch)
 
 #Ex 5 Calculate the time difference between 1 January 1970 and now.
 differ = date(day=1, month=1, year=1970)
-print(date.timestamp)
 today = date.today()
 print(f"How much time passed between 1 January 1970 and now {today} - {differ}")
 #Ex 6 Think, what can you use the datetime module for? Examples:
 # 1 Time series analysis
-
+'''
+Comparing timestamps, calculating trends, or plotting time-based data.
+'''
 # 2 To get a timestamp of any activities in an application
-
+'''
+You can see how much time did activition in application took to maybe improve time complexity
+'''
 # 3 Adding posts on a blog
+'''
+You can track time from when a post was added and track the watchs on post by time 
+'''
+
+
+#* Chat GPT Exercises
+#Begginer
+from datetime import datetime
+currentdt = datetime.now()
+print(currentdt)
+print(f"Today is {datetime.strftime(currentdt, "%A, %d %B %Y")}")
+time = datetime.strftime(currentdt, '%H:%M:%S')
+if time > '12:00:00':
+    stime = currentdt.hour - 12
+    print(f"{stime}:{datetime.strftime(currentdt,'%M:%S')} PM")
+else:
+    print(f"{time} AM")
+print(time)
+
+datestr = "2025-10-15 14:30:00"
+dateobj = datetime.strptime(datestr, "%Y-%m-%d %H:%M:%S")
+print(dateobj)
+ndatestr = datetime.strftime(dateobj, "%d %b %Y, %#I:%M %p")
+print(ndatestr)
+
+# Comparing Dates
+# Write a program that takes two dates and prints which one comes earlier.
+date1 = date(year=2009, month=12, day=5)
+date2 = date(year=2000, month=1, day=12)
+if date1 < date2:
+    print(f'date1: {date1} comes earlier then date2: {date2}')
+else:
+    print(f'date2: {date2} comes earlier then date1: {date1}')
+    
+# 🟡 Intermediate Exercises
+# Days Until a Given Date
+# Ask the user for their next birthday (e.g. "2025-12-10") and calculate how many days are left until that date.
+
+# Working with timedelta
+# Given a meeting that starts at "2025-10-15 09:00:00" and lasts 2 hours 30 minutes, calculate the end time.
+
+# Find the Difference Between Two Dates
+# Calculate how many days, hours, and minutes have passed since "2020-01-01".
+
+# Parse Multiple Date Formats
+# Write a function that can correctly parse any of the following:
+# "2025-10-15"
+# "15/10/2025"
+# "October 15, 2025"
+
+# Generate a List of Dates
+# Create a list of all dates between two given dates (inclusive).
+
+# 🔵 Advanced Exercises
+
+# Week Number and Day of the Year
+# Print the current week number (ISO calendar) and the day number of the year.
+
+# Timezone Handling
+# Display the current UTC time and convert it to your local timezone (using pytz or zoneinfo).
+
+# Next Monday Finder
+# Write a function that, given any date, returns the date of the next Monday.
+
+# Scheduling Simulation
+# Given a list of event times, calculate how many minutes remain until the next event.
+
+# Countdown Timer
+# Create a live countdown in the terminal for 10 seconds using datetime and time.sleep().
+
+# Date Range Filtering
+# You have a list of events with timestamps. Filter only those that happened in the past 7 days.
+
+# ⚫ Expert / Real-World Projects
+
+# Employee Attendance Tracker
+# Log check-in/check-out times using datetime.now() and calculate total hours worked per day.
+
+# Time Zone Aware Logger
+# Automatically tag log entries with the current local time and UTC offset.
+
+# Flight Time Calculator
+# Given a departure time in one timezone and an arrival time in another, calculate the total flight duration.
+
+# Recurring Task Generator
+# Generate all future occurrences of a weekly meeting for the next 3 months.
