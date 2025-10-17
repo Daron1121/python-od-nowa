@@ -158,12 +158,27 @@ else:
 # 🟡 Intermediate Exercises
 # Days Until a Given Date
 # Ask the user for their next birthday (e.g. "2025-12-10") and calculate how many days are left until that date.
+datau = '2026-05-11'# datau = input('Input date of your birthday (e.g. "YYYY-MM-DD") ')
+datau = datetime.strptime(datau, "%Y-%m-%d")
+datanow = datetime.now()
+hmuchis = datau - datanow
+print(hmuchis)
 
 # Working with timedelta
 # Given a meeting that starts at "2025-10-15 09:00:00" and lasts 2 hours 30 minutes, calculate the end time.
+meetdate = datetime(year=2025, month=10, day=15, hour=9, minute=00, second=00)
+howlong = timedelta(hours=2, minutes=30)
+print(meetdate + howlong)
 
 # Find the Difference Between Two Dates
 # Calculate how many days, hours, and minutes have passed since "2020-01-01".
+kiedy = datetime(year=2020, month=1, day=1)
+now = datanow - kiedy
+total_seconds = now.total_seconds()
+dni = now.days
+godziny = int((total_seconds // 3600) % 24)   # pełne godziny po odjęciu dni
+minuty = int((total_seconds // 60) % 60)  
+print(f"From {kiedy} passed {dni} days, {godziny} hours and {minuty} minutes")
 
 # Parse Multiple Date Formats
 # Write a function that can correctly parse any of the following:
