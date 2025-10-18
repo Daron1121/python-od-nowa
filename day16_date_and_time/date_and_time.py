@@ -132,13 +132,13 @@ from datetime import datetime
 currentdt = datetime.now()
 print(currentdt)
 print(f"Today is {datetime.strftime(currentdt, "%A, %d %B %Y")}")
-time = datetime.strftime(currentdt, '%H:%M:%S')
-if time > '12:00:00':
+time1 = datetime.strftime(currentdt, '%H:%M:%S')
+if time1 > '12:00:00':
     stime = currentdt.hour - 12
     print(f"{stime}:{datetime.strftime(currentdt,'%M:%S')} PM")
 else:
-    print(f"{time} AM")
-print(time)
+    print(f"{time1} AM")
+print(time1)
 
 datestr = "2025-10-15 14:30:00"
 dateobj = datetime.strptime(datestr, "%Y-%m-%d %H:%M:%S")
@@ -185,14 +185,36 @@ print(f"From {kiedy} passed {dni} days, {godziny} hours and {minuty} minutes")
 # "2025-10-15"
 # "15/10/2025"
 # "October 15, 2025"
+datestr = "2025-10-15"
+def date_changer(date1):
+    formats = ["%Y-%m-%d", "%d/%m/%Y", "%B %d, %Y"]
+    dateobj = None
+    for f in formats:
+        try:
+            dateobj = datetime.strptime(date1, f)
+        except ValueError:
+            continue
+    if dateobj is None:
+        return "Unknown date format"
+    else:
+        return dateobj
+print(date_changer(datestr))
 
 # Generate a List of Dates
 # Create a list of all dates between two given dates (inclusive).
+dat1 = date(2025,11,5)
+dat2 = date(2025,11,10)
+times = (dat2 - dat1).days 
+a = [dat1 + timedelta(days=i) for i in range(times + 1)]
+print(a)
+print([d.isoformat() for d in a])
 
 # 🔵 Advanced Exercises
-
 # Week Number and Day of the Year
 # Print the current week number (ISO calendar) and the day number of the year.
+now = datetime.now()
+print(f"Current week number (ISO Callendar): {now.isocalendar().week}")
+print(f"Current day number of the year: {now.timetuple().tm_yday}")
 
 # Timezone Handling
 # Display the current UTC time and convert it to your local timezone (using pytz or zoneinfo).
@@ -205,6 +227,14 @@ print(f"From {kiedy} passed {dni} days, {godziny} hours and {minuty} minutes")
 
 # Countdown Timer
 # Create a live countdown in the terminal for 10 seconds using datetime and time.sleep().
+import time
+# i = 10
+# while i != 0:
+#     print(i)
+#     i -= 1
+#     time.sleep(1)
+# print("Time's up!")
+
 
 # Date Range Filtering
 # You have a list of events with timestamps. Filter only those that happened in the past 7 days.
