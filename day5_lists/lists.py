@@ -72,7 +72,45 @@ name, _, role, _ = person
 print(name)
 print(role)
 
+# Asteriks & underscore
 name, *_, country = person
+
+#* 4 - Explore & Analyze Lists
+numbers = [1,5,3,4,2,5]
+
+#analyze
+print("Max:", max(numbers))
+print("Min:", min(numbers))
+print("Sum:", sum(numbers))
+print("Length of list:", len(numbers))
+
+#completeness & existance check
+print("All:", all(numbers))
+print("All:", all([1 ,0 ,3]))
+print("All:", all(['b', 'a', 'c']))
+print("All:", all(['b', 'a', '']))
+print("All:", any([]))
+print("All:", any(['b', 'a', 'c']))
+print("All:", any(['b', 'a', '']))
+print("All:", any([0,0,0]))
+
+#Search & count
+print("Count", numbers.count(5))
+print("Index of 3:", numbers.index(3))
+
+#Membership & identity
+print(4 in numbers)
+print(8 in numbers)
+print(8 not in numbers)
+list1 = [1,2,3]
+list2 = [1,2,3]
+print(list1 is list2)
+
+#Comparison
+print(list1 == list2)
+list1 = [5,8,3]
+list2 = [5,2,3]
+print(list1 > list2) # python looks only on 1st index of both list if it is the same it go +1 index until one is bigger
 #-------------------------------
 '''
 --------------------------------

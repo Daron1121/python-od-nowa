@@ -216,14 +216,72 @@ now = datetime.now()
 print(f"Current week number (ISO Callendar): {now.isocalendar().week}")
 print(f"Current day number of the year: {now.timetuple().tm_yday}")
 
-# Timezone Handling
-# Display the current UTC time and convert it to your local timezone (using pytz or zoneinfo).
+#todo Timezone Handling
+# Display the current UTC time and convert it to your local timezone (using zoneinfo).
+'''
+1. get time now in utc
+2. get my local timezone
+3. sum up utc and my deltatime
+'''
+from datetime import datetime
+import pytz
+
+utc_now = datetime.now(pytz.utc)
+local_time = utc_now.astimezone(pytz.timezone("Europe/Warsaw"))
+
+print("UTC:", utc_now)
+print("Local:", local_time)
+
 
 # Next Monday Finder
 # Write a function that, given any date, returns the date of the next Monday.
+print(50 * '-')
+def next_monday(g_date):
+    formats = ["%Y-%m-%d", "%d/%m/%Y", "%B %d, %Y"]
+    dateobj = None
+    for f in formats:
+        try:
+            dateobj = datetime.strptime(g_date, f)
+        except ValueError:
+            continue
+    days_until_monday = (7 - dateobj.weekday()) % 7
+    if days_until_monday == 0:
+        days_until_monday = 7
+
+    next_mon = dateobj + timedelta(days=days_until_monday)
+    return f"Next Monday will be on: {next_mon.date()}"
+print(next_monday("2025-10-19"))
+    
 
 # Scheduling Simulation
 # Given a list of event times, calculate how many minutes remain until the next event.
+from datetime import datetime, timezone
+
+# Given event times (UTC)
+event_times = [
+    "2025-10-19T10:30:00Z","2025-10-19T14:00:00Z","2025-10-19T18:45:00Z",
+    "2025-10-20T09:15:00Z","2025-10-20T16:00:00Z","2025-10-21T08:30:00Z",
+    "2025-10-21T12:00:00Z","2025-10-22T07:45:00Z","2025-10-22T18:00:00Z",
+    "2025-10-23T10:00:00Z"
+]
+
+# Convert string times to datetime (UTC-aware)
+date_converted = [datetime.strptime(i, "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=timezone.utc) for i in event_times]
+
+# Get current UTC time
+now = datetime.now(timezone.utc)
+
+# Find the next event that’s still upcoming
+upcoming = [t for t in date_converted if t > now]
+
+if upcoming:
+    next_event = min(upcoming)
+    minutes_remaining = int((next_event - now).total_seconds() / 60)
+    print(f"Next event: {next_event}")
+    print(f"Minutes remaining: {minutes_remaining}")
+else:
+    print("No upcoming events.")
+
 
 # Countdown Timer
 # Create a live countdown in the terminal for 10 seconds using datetime and time.sleep().
@@ -238,9 +296,15 @@ import time
 
 # Date Range Filtering
 # You have a list of events with timestamps. Filter only those that happened in the past 7 days.
+timestamps = ["2025-09-25T11:43:28Z","2025-09-28T05:10:12Z","2025-10-01T19:27:50Z","2025-10-02T08:02:33Z","2025-10-04T22:10:45Z","2025-10-05T14:56:19Z","2025-10-06T23:40:51Z","2025-10-08T09:17:03Z","2025-10-09T03:28:49Z","2025-10-10T18:22:30Z","2025-10-11T07:05:12Z","2025-10-12T20:49:27Z","2025-10-13T15:33:40Z","2025-10-14T09:56:18Z","2025-10-15T23:45:59Z","2025-10-16T10:18:26Z","2025-10-17T04:40:12Z","2025-10-17T22:15:08Z","2025-10-18T19:57:03Z","2025-10-19T06:28:54Z"]
+validtimestmaps = []
+for timestamp1 in timestamps:
+    if datetime.fromisoformat(timestamp1.replace("Z","")) > datanow - timedelta(days=7):
+        validtimestmaps.append(timestamp1)
+print(validtimestmaps) 
+
 
 # ⚫ Expert / Real-World Projects
-
 # Employee Attendance Tracker
 # Log check-in/check-out times using datetime.now() and calculate total hours worked per day.
 
