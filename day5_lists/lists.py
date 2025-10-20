@@ -111,6 +111,50 @@ print(list1 == list2)
 list1 = [5,8,3]
 list2 = [5,2,3]
 print(list1 > list2) # python looks only on 1st index of both list if it is the same it go +1 index until one is bigger
+
+#* 5 - How to add, remove and update list
+letters = ['a', 'b', 'c']
+letters.append('x')
+letters.insert(1, 'y')
+letters.insert(3, 'z')
+print(letters)
+
+matrix4 = [['a', 'b', 'c'], ['d', 'e', 'f'],['g', 'h' ,'i']]
+matrix4.append(['x','y','z'])
+matrix4.insert(0, ['a','a','a'])
+matrix4[1].append('x')
+matrix4[0].insert(0, 'z')
+print(matrix4)
+
+
+
+letters_t = ['a', 'b', 'c']
+letters.clear()
+print(letters_t)
+
+letters = ['a', 'b', 'a']
+letters.remove('a')
+print(letters)
+
+letters = ['a', 'b', 'c']
+removed = letters.pop()
+print(letters)
+print('Removed Item:', removed)
+
+matrix = [['a', 'b', 'c'], ['d', 'e', 'f'],['g', 'h' ,'i']]
+# matrix.remove(['a', 'b', 'c'])
+# matrix.pop()
+matrix[1].remove('e')
+matrix[-1].pop()
+matrix[0].pop()
+print(matrix)
+
+
+letters = ['a', 'b', 'c']
+letters[0] = 'x'
+letters[1] = 'y'
+letters = 'z'
+print(letters)
 #-------------------------------
 '''
 --------------------------------

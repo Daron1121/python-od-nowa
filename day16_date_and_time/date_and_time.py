@@ -216,22 +216,13 @@ now = datetime.now()
 print(f"Current week number (ISO Callendar): {now.isocalendar().week}")
 print(f"Current day number of the year: {now.timetuple().tm_yday}")
 
-#todo Timezone Handling
+# Timezone Handling
 # Display the current UTC time and convert it to your local timezone (using zoneinfo).
-'''
-1. get time now in utc
-2. get my local timezone
-3. sum up utc and my deltatime
-'''
-from datetime import datetime
-import pytz
 
-utc_now = datetime.now(pytz.utc)
-local_time = utc_now.astimezone(pytz.timezone("Europe/Warsaw"))
-
-print("UTC:", utc_now)
-print("Local:", local_time)
-
+utc_now = datetime.utcnow()
+local_now = datetime.now()
+print("UTC Time:", utc_now)
+print("Local Time:", local_now)
 
 # Next Monday Finder
 # Write a function that, given any date, returns the date of the next Monday.
