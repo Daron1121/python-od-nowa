@@ -155,6 +155,30 @@ letters[0] = 'x'
 letters[1] = 'y'
 letters = 'z'
 print(letters)
+
+#* 6 - How order list
+letters = ['c', 'a', 'b']
+letters.sort(reverse=True)
+print(letters)
+
+matrix = [
+    ['d', 'e', 'f'],
+    ['g', 'z' ,'i'],
+    ['a', 'a', 'c']
+]
+matrix[1].sort()
+print(matrix)
+
+letters = ['c', 'a', 'b']
+new_list = sorted(letters)
+print(f"Sorted List: {new_list}")
+print(f"Original List: {letters}")
+
+letters = ['c', 'a', 'b']
+#letters.reverse()
+new_list = list(reversed(letters))
+print('Original list', letters)
+print('Reversed list', new_list)
 #-------------------------------
 '''
 --------------------------------

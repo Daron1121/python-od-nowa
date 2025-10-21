@@ -298,6 +298,21 @@ print(validtimestmaps)
 # ⚫ Expert / Real-World Projects
 # Employee Attendance Tracker
 # Log check-in/check-out times using datetime.now() and calculate total hours worked per day.
+check_in = {}
+def login_out(tracker):
+    if tracker in check_in: 
+        delt = datetime.now() - check_in[tracker]
+        check_in.pop(tracker)
+        return f"You ({tracker}) worked {delt}"
+    if tracker not in check_in:
+        check_in[tracker] = datetime.now()
+        print(f"You ({tracker}) are checked in")
+        return ''
+# print(login_out('1'))
+# time.sleep(3)
+# print(login_out('1'))
+
+
 
 # Time Zone Aware Logger
 # Automatically tag log entries with the current local time and UTC offset.
@@ -307,3 +322,32 @@ print(validtimestmaps)
 
 # Recurring Task Generator
 # Generate all future occurrences of a weekly meeting for the next 3 months.
+
+# Plan działania (etap po etapie)
+
+# 2 Ustal okres generowania
+# Oblicz datę końcową = start_date + relativedelta(months=+3)
+
+# 3 Znajdź pierwsze spotkanie w kalendarzu
+# Jeśli start_date nie przypada w wybrany weekday, to przesuń ją do najbliższego odpowiedniego dnia tygodnia.
+
+# 4 Generowanie kolejnych wystąpień
+# Użyj pętli while current_date <= end_date:
+# W każdej iteracji:
+# zapisz current_date
+# dodaj timedelta(days=7) → bo spotkania są co tydzień
+
+# 5 Formatowanie wyników
+# Wynikiem może być lista datetime lub gotowy tekst np.:
+# Meeting #1 → Monday 21 Oct 2025, 10:00
+# Meeting #2 → Monday 28 Oct 2025, 10:00
+
+def generate_meetings(start_date, weekday, time_of_day):
+    # 1. Ustalenie dat
+    end_date = start_date + timedelta(days=90)
+    print(f"Calculating dates of meetings from {start_date} to {end_date}")
+    # 2. Znalezienie pierwszego dnia tygodnia
+    # 3. Pętla co 7 dni do końca okresu
+    # 4. Dodawanie terminów do listy
+    # 5. Zwrócenie listy terminów
+print(generate_meetings(date(2025,10,21), 'Monday', '10:30'))
