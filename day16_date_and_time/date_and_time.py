@@ -322,32 +322,24 @@ def login_out(tracker):
 
 # Recurring Task Generator
 # Generate all future occurrences of a weekly meeting for the next 3 months.
-
-# Plan działania (etap po etapie)
-
-# 2 Ustal okres generowania
-# Oblicz datę końcową = start_date + relativedelta(months=+3)
-
-# 3 Znajdź pierwsze spotkanie w kalendarzu
-# Jeśli start_date nie przypada w wybrany weekday, to przesuń ją do najbliższego odpowiedniego dnia tygodnia.
-
-# 4 Generowanie kolejnych wystąpień
-# Użyj pętli while current_date <= end_date:
-# W każdej iteracji:
-# zapisz current_date
-# dodaj timedelta(days=7) → bo spotkania są co tydzień
-
-# 5 Formatowanie wyników
-# Wynikiem może być lista datetime lub gotowy tekst np.:
-# Meeting #1 → Monday 21 Oct 2025, 10:00
-# Meeting #2 → Monday 28 Oct 2025, 10:00
-
-def generate_meetings(start_date, weekday, time_of_day):
-    # 1. Ustalenie dat
+def generate_meetings(start_date, weekday):
     end_date = start_date + timedelta(days=90)
+
+    weekday_map = {'Monday': 1,'Tuesday': 2,'Wednesday': 3,'Thursday': 4,'Friday': 5,'Saturday': 6,'Sunday': 7}
+    weekday_number = weekday_map.get(weekday)
+    if weekday_number is None:
+        raise ValueError(f"Invalid weekday name: {weekday}")
+
     print(f"Calculating dates of meetings from {start_date} to {end_date}")
-    # 2. Znalezienie pierwszego dnia tygodnia
-    # 3. Pętla co 7 dni do końca okresu
-    # 4. Dodawanie terminów do listy
-    # 5. Zwrócenie listy terminów
-print(generate_meetings(date(2025,10,21), 'Monday', '10:30'))
+
+    meetings = []
+    for i in range(91):
+        iterated_date = start_date + timedelta(days=i)
+        if iterated_date.isoweekday() == weekday_number:
+            meetings.append(iterated_date)
+
+    to_return = []
+    for iter in meetings:
+        to_return.append(iter.strftime('%d-%m-%Y'))
+    return f'Meetings of next 90 days on {to_return}'
+print(generate_meetings(date(2025,10,21), 'Monday'))

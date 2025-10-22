@@ -179,6 +179,54 @@ letters = ['c', 'a', 'b']
 new_list = list(reversed(letters))
 print('Original list', letters)
 print('Reversed list', new_list)
+
+#* 7 - How copy lists
+#Assignment
+letters = ['a', 'b', 'c']
+letters_copy = letters.copy()
+# letters_copy = letters
+letters.pop()
+letters_copy.append('z')
+print('Original:',letters)
+print('Copy:',letters_copy)
+
+#Shallow copy
+matrix = [
+    ['a', 'b'],
+    ['c', 'd']]
+matrix_copy = matrix.copy()
+matrix.pop()
+matrix[0].append('z')
+print('Original:',matrix)
+print('Copy:',matrix_copy)
+
+#Deep Copy
+import copy
+matrix = [
+    ['a', 'b'],
+    ['c', 'd']]
+matrix_copy = copy.deepcopy(matrix)
+matrix.pop()
+matrix[0].append('z')
+print('Original:',matrix)
+print('Copy:',matrix_copy)
+
+
+# IS operator
+original = [
+    ['a', 'b'],
+    ['c', 'd']]
+copy1 = original
+print("Same Object?", original is copy1, "\n")
+
+
+copy2 = original.copy()
+print("Same Object?", original is copy2, "\n")
+print("Shared Lists?", original[0] is copy2[0], "\n")
+
+copy3 = copy.deepcopy(original)
+print("Same Object?", original is copy3, "\n")
+print("Shared Lists?", original[0] is copy3[0], "\n")
 #-------------------------------
 '''
 --------------------------------
