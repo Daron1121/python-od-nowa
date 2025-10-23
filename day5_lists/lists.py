@@ -227,6 +227,31 @@ print("Shared Lists?", original[0] is copy2[0], "\n")
 copy3 = copy.deepcopy(original)
 print("Same Object?", original is copy3, "\n")
 print("Shared Lists?", original[0] is copy3[0], "\n")
+
+
+#* 8 - How combine lists
+letters = ['a', 'b', 'c']
+numbers = [1, 2, 3]
+comb = letters + numbers
+print(comb)
+
+
+letters = ['a', 'b', 'c']
+numbers = [1, 2, 3]
+comb = [letters, numbers]
+print(comb)
+
+letters = ['a', 'b', 'c']
+numbers = [1, 2, 3]
+numbers.extend(letters)
+print(letters)
+print(numbers)
+
+
+letters = ['a', 'b', 'c']
+numbers = [1, 2, 3]
+comb = list(zip(letters, numbers))
+print(comb)
 #-------------------------------
 '''
 --------------------------------
