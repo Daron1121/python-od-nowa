@@ -252,6 +252,13 @@ letters = ['a', 'b', 'c']
 numbers = [1, 2, 3]
 comb = list(zip(letters, numbers))
 print(comb)
+
+#* 9 - iterator and iterable
+letters = ['a', 'b', 'c']
+new_list = []
+for l in letters:
+    new_list.append(l.upper())
+    print(new_list)
 #-------------------------------
 '''
 --------------------------------
