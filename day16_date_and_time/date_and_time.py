@@ -312,13 +312,26 @@ def login_out(tracker):
 # time.sleep(3)
 # print(login_out('1'))
 
-
-
-# Time Zone Aware Logger
-# Automatically tag log entries with the current local time and UTC offset.
-
 # Flight Time Calculator
 # Given a departure time in one timezone and an arrival time in another, calculate the total flight duration.
+from datetime import datetime
+from zoneinfo import ZoneInfo 
+
+def flight_duration(departure_time, departure_tz, arrival_time, arrival_tz):
+    dep = datetime.fromisoformat(departure_time).replace(tzinfo=ZoneInfo(departure_tz))
+    arr = datetime.fromisoformat(arrival_time).replace(tzinfo=ZoneInfo(arrival_tz))
+    
+    duration = arr.astimezone(ZoneInfo("UTC")) - dep.astimezone(ZoneInfo("UTC"))
+    return duration
+
+# przykład użycia
+duration = flight_duration(
+    "2025-10-24T14:00:00", "America/Los_Angeles",
+    "2025-10-25T09:00:00", "Europe/Warsaw"
+)
+
+print(f"Czas lotu: {duration}")
+
 
 # Recurring Task Generator
 # Generate all future occurrences of a weekly meeting for the next 3 months.
