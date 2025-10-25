@@ -259,6 +259,41 @@ new_list = []
 for l in letters:
     new_list.append(l.upper())
     print(new_list)
+
+letters = ['a', 'b', 'c']
+print(list(enumerate(letters, start=1)))
+for index, value in enumerate(letters):
+    print(index,value)
+
+letters = ['a', 'b', 'c']
+print(list(reversed(letters)))
+for l in reversed(letters):
+    print(l)
+
+letters = ['a', 'b', 'c']
+numbers = [1, 2, 3]
+print(list(zip(letters,numbers)))
+for l,n in zip(letters,numbers):
+    print(l,n)
+
+letters = ['a', 'b', 'c']
+print(list(map(str.upper, letters)))
+
+numbers = ['1', '2', '3']
+print(list(map(int, numbers)))
+
+names = ['  Maria  ', ' John    ', ' Albert   ']
+print(list(map(str.strip, names)))
+for n in map(str.strip, names):
+    print(n)
+
+letters = ['a','', 'b',None, 'c', False]
+print(list(filter(None, letters)))
+
+items = ['sql', '123', 'python', '42']
+# print(list(filter(str.isalpha, items)))
+for i in filter(str.isalpha, items):
+    print(i)
 #-------------------------------
 '''
 --------------------------------
