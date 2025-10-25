@@ -86,19 +86,20 @@ print(ru)
 # Write a program that:
 # Asks the user for two numbers,
 # Tries to divide them, Gracefully handles:ZeroDivisionError, ValueError, any other unexpected exception
-int1 = input("Input number 1 : ")
-int2 = input("Input number 2 : ")
-try:
-    division = int(int1) / int(int2)
-    print(f"The result is: {division}")
-except ZeroDivisionError as e:
-    print(f'Int2 cant be 0 - {e}')
-except ValueError as v:
-    print(f'You need to provide integer! - {v}')
-except Exception as ae:
-    print(f"Something went wrong - {ae}")
-finally:
-    print("Program finished.")
+
+# int1 = input("Input number 1 : ")
+# int2 = input("Input number 2 : ")
+# try:
+#     division = int(int1) / int(int2)
+#     print(f"The result is: {division}")
+# except ZeroDivisionError as e:
+#     print(f'Int2 cant be 0 - {e}')
+# except ValueError as v:
+#     print(f'You need to provide integer! - {v}')
+# except Exception as ae:
+#     print(f"Something went wrong - {ae}")
+# finally:
+#     print("Program finished.")
 
 # Exercise 2: File Handling
 # Write a program that tries to open a file called "data.txt".
@@ -111,90 +112,98 @@ except FileNotFoundError as e:
 # Exercise 3: Exception with Feedback
 # Ask the user for their name and year of birth.
 # Try to calculate their age.
-# If the input is invalid, print the exact error using:
+
+
+# name = input("Enter your name: ")
+# year_of_birth = input("Enter your year of birth: ")
+# try:
+#     age = 2025 - int(year_of_birth)
+#     print(age)
 # except Exception as e:
-#   print(e)
-name = input("Enter your name: ")
-year_of_birth = input("Enter your year of birth: ")
-try:
-    age = 2025 - int(year_of_birth)
-except Exception as e:
-    print(e)
+#     print(e)
 
 
     
 
-# todo PART 2: Packing & Unpacking
+# PART 2: Packing & Unpacking
 # Exercise 4: Unpacking Lists
-# You have a list:
-# numbers = [5, 10, 15, 20, 25, 30, 35]
+numbers = [5, 10, 15, 20, 25, 30, 35]
 # Unpack it so that:
 # The first two numbers go into a and b,
 # The remaining numbers go into rest.
-# Then print:
-# a = 5, b = 10, rest = [15, 20, 25, 30, 35]
+a,b,*rest = numbers
+print(a)
+print(b)
+print(rest)
 
 # Exercise 5: Unpacking Dictionaries
 # Write a function:
-# def describe_person(name, country, city, age):
-#     ...
+def describe_person(name, country, city, age):
+    print(name, country, city, age)
 # and a dictionary:
-# person = {"name": "Alice", "country": "Norway", "city": "Oslo", "age": 28}
+person = {"name": "Alice", "country": "Norway", "city": "Oslo", "age": 28}
 # Use unpacking (**person) to call the function.
-
+print(describe_person(**person))
 
 # Exercise 6: Packing with *args
 # Create a function multiply_all(*args) that multiplies any number of numbers together.
 # Example:
-# print(multiply_all(2, 3, 4))  # 24
-# print(multiply_all(1, 5, 10, 2))  # 100
+def multiply_all(*args):
+    multip = 1
+    for val in args:
+        multip = multip * val
+    return multip
+print(multiply_all(2, 3, 4))  # 24
+print(multiply_all(1, 5, 10, 2))  # 100
 
-# 🎁 Exercise 7: Packing with **kwargs
+# Exercise 7: Packing with **kwargs
 # Create a function print_student_info(**kwargs) that prints any information passed about a student:
-# print_student_info(name="John", age=20, course="Python")
-# Expected output:
-# name = John
-# age = 20
-# course = Python
+def print_student_info(**kwargs):
+    for key in kwargs:
+        print(f'{key} = {kwargs[key]}')
+print_student_info(name="John", age=20, course="Python")
 
-# 🌀 PART 3: Spreading
-# 🌍 Exercise 8: Spread Lists
 
+# PART 3: Spreading
+# Exercise 8: Spread Lists
 # You have:
-# list1 = [1, 2, 3]
-# list2 = [4, 5, 6]
+list1 = [1, 2, 3]
+list2 = [4, 5, 6]
 # Combine them using the spread (*) operator into a new list:
 # [0, *list1, *list2, 7, 8]
-# Expected:
-# [0, 1, 2, 3, 4, 5, 6, 7, 8]
+li1 = [0, *list1, *list2, 7, 8]
+print(li1)
 
 
-# 🔢 PART 4: Enumerate & Zip
-# 🧾 Exercise 9: Enumerate
+# PART 4: Enumerate & Zip
+# Exercise 9: Enumerate
 # You have:
-# countries = ["Finland", "Sweden", "Norway", "Denmark", "Iceland"]
-# Use enumerate() to print:
-# 0 Finland
-# 1 Sweden
-# 2 Norway
-# ...
+countries = ["Finland", "Sweden", "Norway", "Denmark", "Iceland"]
+for index, item in enumerate(countries):
+    print(index, item)
 
-# 🧾 Exercise 10: Find a Country
+# Exercise 10: Find a Country
 # Using the same list, print:
 # Finland found at index 0
 # if "Finland" is in the list (use enumerate and if).
+for index, item in enumerate(countries):
+    if item == 'Finland':
+        print(f'Finland found at index {index}')
 
-# 🔗 Exercise 11: Zip
+
+# Exercise 11: Zip
 # You have two lists:
-# names = ["Alice", "Bob", "Charlie"]
-# scores = [85, 90, 78]
+names = ["Alice", "Bob", "Charlie"]
+scores = [85, 90, 78]
 # Use zip() to loop through them and print:
-# Alice got 85 points
-# Bob got 90 points
-# Charlie got 78 points
+for name, score in zip(names,scores):
+    print(f"{name} got {score} points")
 
-# 💡 Bonus Challenge:
+
+# Bonus Challenge:
 # Combine zip + enumerate to print:
 # 1. Alice - 85
 # 2. Bob - 90
 # 3. Charlie - 78
+for i, (name, score) in enumerate(zip(names,scores)):
+    print(f"{i}. {name} - {score}")
