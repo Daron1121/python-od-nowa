@@ -105,3 +105,175 @@ text = "The position of some particles on the horizontal x-axis are -12, -4, -3 
 numbers = re.findall(r'-?\d+', text)
 numbers = [int(n) for n in numbers]
 print(f"Distance between furthest particles: {max(numbers) - min(numbers)}")
+
+#Exercises: Level 2
+#Write a pattern which identifies if a string is a valid python variable
+def is_valid_variable(Variable):
+    pattern = r'^[A-Za-z_][A-Za-z0-9_]*$'
+    if re.match(pattern, Variable):
+        return True
+    else:
+        return False
+print(is_valid_variable('first_name')) # True
+print(is_valid_variable('first-name')) # False
+print(is_valid_variable('1first_name')) # False
+print(is_valid_variable('firstname')) # True
+
+
+#Exercises: Level 3
+#Clean the following text. After cleaning, count three most frequent words in the string.
+import re
+from collections import Counter
+
+sentence = '''%I $am@% a %tea@cher%, &and& I lo%#ve %tea@ching%;. There $is nothing; &as& mo@re rewarding as educa@ting &and& @emp%o@wering peo@ple. ;I found tea@ching m%o@re interesting tha@n any other %jo@bs. %Do@es thi%s mo@tivate yo@u to be a tea@cher!?'''
+def clean_text(sent):
+    to_sub = ['%', '@', '&', '$', '#', ';', '.', '?', '!']
+    for l in to_sub:
+        print(l)
+        sent = re.sub(re.escape(l), '', sent)
+    return sent
+def most_frequent_words(text):
+    # dzielimy tekst na słowa
+    words = text.split()
+    # liczymy częstość
+    counter = Counter(words)
+    return counter.most_common(3)
+
+
+cleaned = clean_text(sentence)
+print(cleaned)
+print()
+
+# zliczamy najczęstsze słowa
+print(most_frequent_words(cleaned))
+
+#! CHAT EXERCISES
+# 🟢 Beginner Level (Basic Matching & Character Classes)
+# 1. Match all email addresses in a string
+# Task: Extract all valid email addresses.
+# Example:
+text = "Contact us at support@example.com or sales@shop.net"
+matches = re.findall(r"\w+@\w+\.\w+", text)
+print(matches)
+
+# 2. Find all digits in a string
+# Task: Return all digits from a mixed string.
+# Example:
+text = "My phone number is 415-555-2671"
+# # Expected output: ['4', '1', '5', '5', '5', '5', '2', '6', '7', '1']
+matches = re.findall(r'\d', text)
+print(matches)
+
+# 3. Match words starting with a capital letter
+# Example:
+text = "Alice and Bob went to New York City."
+# Expected output: ['Alice', 'Bob', 'New', 'York', 'City']
+matches = re.findall(r'\b[A-Z][a-z]+', text)
+print(matches)
+
+# 🟡 Intermediate Level (Groups, Quantifiers, Alternation)
+# 4. Extract dates in DD/MM/YYYY format
+# Example:
+text = "Events: 12/10/2024, 03/05/2025 and 30/12/23"
+# # Expected output: ['12/10/2024', '03/05/2025']
+matches = re.findall(r'\b\d{2}/\d{2}/\d{4}\b', text)
+print(matches)
+
+
+# 5. Capture domain names from URLs
+
+# Example:
+
+text = "Visit https://www.google.com or http://openai.com."
+# # Expected output: ['google', 'openai']
+matches = re.findall(r'https?://(www\.)?(\w+)\.\w+', text)
+domains = [m[1] for m in matches]
+print(domains)
+
+
+
+
+
+
+# Hint: Use groups with r'https?://(www\.)?(\w+)\.\w+'
+
+# 6. Find all repeated words
+
+# Example:
+
+# text = "This is is a test test string"
+# # Expected output: ['is', 'test']
+
+
+# Hint: Use backreferences like r'\b(\w+)\s+\1\b'
+
+# 🔵 Advanced Level (Lookahead, Lookbehind, Complex Patterns)
+# 7. Match numbers that are not followed by a percent sign
+
+# Example:
+
+# text = "50%, 100, 75%, 200"
+# # Expected output: ['100', '200']
+
+
+# Hint: Use a negative lookahead (?!%)
+
+# 8. Extract words inside quotes
+
+# Example:
+
+# text = 'He said "hello" and then "goodbye".'
+# # Expected output: ['hello', 'goodbye']
+
+
+# Hint: Use r'"(.*?)"'
+
+# 9. Match valid IPv4 addresses
+
+# Example:
+
+# text = "Valid: 192.168.0.1, Invalid: 999.999.1.1"
+# # Expected output: ['192.168.0.1']
+
+
+# Hint: Use something like
+# r'\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b'
+# and filter values <= 255.
+
+# 🔴 Expert Level (Complex Validation, Nested Groups, Conditional Patterns)
+# 10. Validate a password
+
+# Requirements:
+
+# At least 8 characters
+
+# At least one uppercase, lowercase, digit, and special char
+# Example:
+
+# text = "MyPass123!"
+# # Expected output: True
+
+
+# Hint: Use a single regex with lookaheads:
+# r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$'
+
+# 11. Parse HTML tags (simple version)
+
+# Example:
+
+# text = "<div><p>Hello</p></div>"
+# # Expected output: ['div', 'p']
+
+
+# Hint: Use r'<(/?)(\w+)[^>]*>' and groups.
+
+# 12. Extract nested parentheses content (hard)
+
+# Example:
+
+# text = "f(x, g(y, z))"
+# # Expected output: ['x, g(y, z)', 'y, z']
+
+
+# Hint: Use recursive patterns (via regex module, not re):
+# r'\((?:[^()]+|(?R))*\)'
