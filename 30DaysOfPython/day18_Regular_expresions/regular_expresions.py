@@ -190,77 +190,72 @@ matches = re.findall(r'https?://(www\.)?(\w+)\.\w+', text)
 domains = [m[1] for m in matches]
 print(domains)
 
-
-
-
-
-
-# Hint: Use groups with r'https?://(www\.)?(\w+)\.\w+'
-
 # 6. Find all repeated words
-
 # Example:
-
-# text = "This is is a test test string"
-# # Expected output: ['is', 'test']
-
+text = "This is is a test test string"
+# Expected output: ['is', 'test']
 
 # Hint: Use backreferences like r'\b(\w+)\s+\1\b'
 
+
 # 🔵 Advanced Level (Lookahead, Lookbehind, Complex Patterns)
 # 7. Match numbers that are not followed by a percent sign
-
 # Example:
-
-# text = "50%, 100, 75%, 200"
+text = "50%, 100, 75%, 200"
 # # Expected output: ['100', '200']
-
+matches = re.findall(r'\d\d+(?!%)', text)
+print(matches)
 
 # Hint: Use a negative lookahead (?!%)
 
 # 8. Extract words inside quotes
-
 # Example:
-
-# text = 'He said "hello" and then "goodbye".'
+text = 'He said "hello" and then "goodbye".'
 # # Expected output: ['hello', 'goodbye']
-
+matches = re.findall(r'"(.*?)"', text)
+print(matches)
 
 # Hint: Use r'"(.*?)"'
 
 # 9. Match valid IPv4 addresses
-
 # Example:
 
-# text = "Valid: 192.168.0.1, Invalid: 999.999.1.1"
-# # Expected output: ['192.168.0.1']
+text = "Valid: 192.168.0.1, Invalid: 999.999.1.1"
+matches = re.findall(r'\b(?:\d{1,3}\.){3}\d{1,3}\b', text)
+def is_valid_ip(ip):
+    parts = ip.split('.')
+    return all(0 <= int(p) <= 255 for p in parts)
 
+correct = [ip for ip in matches if is_valid_ip(ip)]
+print(correct)
 
 # Hint: Use something like
 # r'\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b'
 # and filter values <= 255.
 
+
 # 🔴 Expert Level (Complex Validation, Nested Groups, Conditional Patterns)
 # 10. Validate a password
-
 # Requirements:
-
 # At least 8 characters
-
 # At least one uppercase, lowercase, digit, and special char
 # Example:
-
 # text = "MyPass123!"
 # # Expected output: True
+
+
+
+
+
+
+
 
 
 # Hint: Use a single regex with lookaheads:
 # r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$'
 
 # 11. Parse HTML tags (simple version)
-
 # Example:
-
 # text = "<div><p>Hello</p></div>"
 # # Expected output: ['div', 'p']
 
@@ -268,9 +263,7 @@ print(domains)
 # Hint: Use r'<(/?)(\w+)[^>]*>' and groups.
 
 # 12. Extract nested parentheses content (hard)
-
 # Example:
-
 # text = "f(x, g(y, z))"
 # # Expected output: ['x, g(y, z)', 'y, z']
 
