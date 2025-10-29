@@ -234,6 +234,7 @@ print(correct)
 # and filter values <= 255.
 
 
+
 # 🔴 Expert Level (Complex Validation, Nested Groups, Conditional Patterns)
 # 10. Validate a password
 # Requirements:
@@ -256,8 +257,23 @@ print(correct)
 
 # 11. Parse HTML tags (simple version)
 # Example:
-# text = "<div><p>Hello</p></div>"
+text = "<div><p>Hello</p></div>"
 # # Expected output: ['div', 'p']
+matches = re.findall(r'<(/?)(\w+)[^>]*>',text)
+matches1 = []
+for inner in matches:
+    if inner[1] in matches1:
+        continue
+    else:
+        matches1.append(inner[1])
+print(matches1)
+
+
+
+
+
+
+
 
 
 # Hint: Use r'<(/?)(\w+)[^>]*>' and groups.
