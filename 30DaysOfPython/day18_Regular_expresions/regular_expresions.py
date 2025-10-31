@@ -241,19 +241,12 @@ print(correct)
 # At least 8 characters
 # At least one uppercase, lowercase, digit, and special char
 # Example:
-# text = "MyPass123!"
+text = "MyPass123!"
 # # Expected output: True
-
-
-
-
-
-
-
-
+valid = re.findall(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$',text)
+print(valid)
 
 # Hint: Use a single regex with lookaheads:
-# r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$'
 
 # 11. Parse HTML tags (simple version)
 # Example:
@@ -269,20 +262,24 @@ for inner in matches:
 print(matches1)
 
 
-
-
-
-
-
-
-
 # Hint: Use r'<(/?)(\w+)[^>]*>' and groups.
 
-# 12. Extract nested parentheses content (hard)
-# Example:
-# text = "f(x, g(y, z))"
-# # Expected output: ['x, g(y, z)', 'y, z']
+print(50 * '-')
+#---------------------------------------------------
+# YT video Regular Expressions in Python - FULL COURSE (1 HOUR) - Programming Tutorial
+import re
+
+test_string = '123abc456789abc123ABC'
+
+pattern = re.compile(r"abc")
+matches = pattern.finditer(test_string)
+# matches = re.finditer(r"abc", test_string)
+for match in matches:
+    print(match)
 
 
-# Hint: Use recursive patterns (via regex module, not re):
-# r'\((?:[^()]+|(?R))*\)'
+
+# a = '\tHello'
+# matches = re.finditer(r"Hello", a)
+# for match in matches:
+#     print(match)
