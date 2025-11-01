@@ -128,3 +128,31 @@ print(word_and_line_reader('./data/michelle_obama_speech.txt'))
 print(word_and_line_reader('./data/donald_speech.txt'))
 # d) Read melina_trump_speech.txt file and count number of lines and words
 print(word_and_line_reader('./data/melina_trump_speech.txt'))
+
+
+#Ex 2
+# Read the countries_data.json data file in data directory, create a function that finds the ten most spoken languages
+def most_spoken_languages(filename, nums):
+    with open(filename, 'r', encoding='utf-8') as f:
+        data = json.load(f)   # <-- konwersja z tekstu JSON do obiektu Python (lista/dict)
+
+    languages = {}
+    for country in data:
+        for language in country['languages']:
+            languages[language] = languages.get(language, 0) + 1
+    sorted_languages = sorted(languages.items(), key=lambda x: x[1], reverse=True)
+    return sorted_languages[:nums]
+    
+
+print(most_spoken_languages('./data/countries_data.json', 10))
+print(most_spoken_languages('./data/countries_data.json', 3))
+
+def most_populated_countries(filename, nums):
+    with open(filename, 'r', encoding='utf-8') as f:
+        data = json.load(f)
+    info = []
+    for dictionary in data:
+        info.append({'country': dictionary['name'], 'population': dictionary['population']})
+    sorted_countries = sorted(info, key=lambda x: x['population'], reverse=True)
+    return sorted_countries[:nums]
+print(most_populated_countries('./data/countries_data.json', 10))
