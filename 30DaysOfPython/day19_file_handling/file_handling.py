@@ -156,3 +156,49 @@ def most_populated_countries(filename, nums):
     sorted_countries = sorted(info, key=lambda x: x['population'], reverse=True)
     return sorted_countries[:nums]
 print(most_populated_countries('./data/countries_data.json', 10))
+
+#* Exercises: Level 2
+#Ex 4 Extract all incoming email addresses as a list from the email_exchange_big.txt file.
+import re
+with open('./data/email_exchanges_big.txt', 'r', encoding='utf-8') as f:
+    emails = re.findall(r'From:\s*([A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,})', f.read())
+    print(emails)
+
+#Ex 5 Find the most common words in the English language. Call the name of your function find_most_common_words, it will take two parameters - a string or a file and a positive integer, indicating the number of words. Your function will return an array of tuples in descending order. Check the output
+def find_most_common_words(plik_lub_tekst, ile):
+    try:
+        with open(plik_lub_tekst, 'r', encoding='utf-8') as f:
+            text = f.read().lower()
+    except FileNotFoundError:
+        text = plik_lub_tekst
+    
+    words = re.findall(r'\b\w+\b',text)
+    print(words)
+
+print(find_most_common_words('./data/donald_speech.txt', 10))
+
+# Ex 6 Use the function, find_most_frequent_words to find: 
+
+# a) The ten most frequent words used in Obama's speech 
+# print(find_most_common_words('./data/obama_speech.txt', 10))
+
+# b) The ten most frequent words used in Michelle's speech 
+# print(find_most_common_words('./data/michelle_obama_speech.txt', 10))
+
+# c) The ten most frequent words used in Trump's speech 
+# print(find_most_common_words('./data/donald_speech.txt', 10))
+
+# d) The ten most frequent words used in Melina's speech
+# print(find_most_common_words('./data/melina_trump_speech.txt', 10))
+
+
+# Ex 7 Write a python application that checks similarity between two texts. It takes a file or a string as a parameter and it will evaluate the similarity of the two texts. For instance check the similarity between the transcripts of Michelle's and Melina's speech. You may need a couple of functions, function to clean the text(clean_text), function to remove support words(remove_support_words) and finally to check the similarity(check_text_similarity). List of stop words are in the data directory
+
+
+# Ex 8  Find the 10 most repeated words in the romeo_and_juliet.txt
+
+
+# Ex 9  Read the hacker news csv file and find out: 
+# a) Count the number of lines containing python or Python 
+# b) Count the number lines containing JavaScript, javascript or Javascript 
+# c) Count the number lines containing Java and not JavaScript
