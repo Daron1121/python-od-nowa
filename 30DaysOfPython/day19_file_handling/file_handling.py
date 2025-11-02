@@ -173,32 +173,75 @@ def find_most_common_words(plik_lub_tekst, ile):
         text = plik_lub_tekst
     
     words = re.findall(r'\b\w+\b',text)
-    print(words)
 
-print(find_most_common_words('./data/donald_speech.txt', 10))
+    word_count = {}
+    for word in words:
+        word_count[word] = word_count.get(word, 0) + 1
+    sorted_arr = sorted(word_count.items(), key= lambda x: x[1], reverse=True)
+    return sorted_arr[:ile]
 
+print(find_most_common_words('ale nie wiem co dac ale dam to', 10))
 # Ex 6 Use the function, find_most_frequent_words to find: 
 
 # a) The ten most frequent words used in Obama's speech 
-# print(find_most_common_words('./data/obama_speech.txt', 10))
+print(find_most_common_words('./data/obama_speech.txt', 10))
 
 # b) The ten most frequent words used in Michelle's speech 
-# print(find_most_common_words('./data/michelle_obama_speech.txt', 10))
+print(find_most_common_words('./data/michelle_obama_speech.txt', 10))
 
 # c) The ten most frequent words used in Trump's speech 
-# print(find_most_common_words('./data/donald_speech.txt', 10))
+print(find_most_common_words('./data/donald_speech.txt', 10))
 
 # d) The ten most frequent words used in Melina's speech
-# print(find_most_common_words('./data/melina_trump_speech.txt', 10))
+print(find_most_common_words('./data/melina_trump_speech.txt', 10))
 
 
 # Ex 7 Write a python application that checks similarity between two texts. It takes a file or a string as a parameter and it will evaluate the similarity of the two texts. For instance check the similarity between the transcripts of Michelle's and Melina's speech. You may need a couple of functions, function to clean the text(clean_text), function to remove support words(remove_support_words) and finally to check the similarity(check_text_similarity). List of stop words are in the data directory
+def check_simmilarity(tekst):
+    def clean_text(tekst):
+        with open(tekst, 'r', encoding='utf-8') as f:
+            f = f.read().lower()
+            f = re.sub(r'[^a-z\s]', '', f)
+            f = re.sub(r'\s+', ' ', f).strip()
+            return f
+
+    cleaned = clean_text(tekst)
+
+    def remove_support_words(tekst):
+        stop_words = ['i','me','my', 'myself', 'we', 'our', 'ours', 'ourselves', 'you', "you're", "you've", "you'll", "you'd", 'your', 'yours', 'yourself', 'yourselves', 'he', 'him', 'his', 'himself', 'she', "she's", 'her', 'hers', 'herself', 'it', "it's", 'its', 'itself', 'they', 'them', 'their', 'theirs', 'themselves', 'what', 'which', 'who', 'whom', 'this', 'that', "that'll", 'these', 'those', 'am', 'is', 'are', 'was', 'were', 'be', 'been', 'being', 'have', 'has', 'had', 'having', 'do', 'does', 'did', 'doing', 'a', 'an', 'the', 'and', 'but', 'if', 'or', 'because', 'as', 'until', 'while', 'of', 'at', 'by', 'for', 'with', 'about', 'against', 'between', 'into', 'through', 'during', 'before', 'after', 'above', 'below', 'to', 'from', 'up','down', 'in', 'out', 'on', 'off', 'over', 'under', 'again', 'further', 'then', 'once', 'here', 'there', 'when', 'where', 'why', 'how', 'all', 'any', 'both', 'each', 'few', 'more', 'most', 'other', 'some', 'such', 'no', 'nor', 'not', 'only', 'own', 'same', 'so', 'than', 'too', 'very', 's', 't', 'can', 'will', 'just', 'don', "don't", 'should', "should've", 'now', 'd', 'll', 'm', 'o', 're', 've', 'y', 'ain', 'aren', "aren't", 'couldn', "couldn't", 'didn', "didn't", 'doesn', "doesn't", 'hadn', "hadn't", 'hasn', "hasn't", 'haven', "haven't", 'isn', "isn't", 'ma', 'mightn', "mightn't", 'mustn', "mustn't", 'needn', "needn't", 'shan', "shan't", 'shouldn', "shouldn't", 'wasn', "wasn't", 'weren', "weren't", 'won', "won't", 'wouldn', "wouldn't"]
+        nowy_tekst = ''
+        for word in tekst.split():
+            if word not in stop_words:
+                nowy_tekst += f'{word} '
+        return nowy_tekst.strip()
+
+    stop_words_removed = remove_support_words(cleaned)
+
+
+
+    return stop_words_removed
+
+tekst1 = check_simmilarity('./data/melina_trump_speech.txt')
+print(tekst1)
+print(60*'-')
+tekst2 = check_simmilarity('./data/michelle_obama_speech.txt')
+print(tekst2)
 
 
 # Ex 8  Find the 10 most repeated words in the romeo_and_juliet.txt
-
+print(find_most_common_words('./data/romeo_and_juliet.txt', 10))
 
 # Ex 9  Read the hacker news csv file and find out: 
+def count_lines(text, co_szukac ,czego_nie=None):
+    with open(text, 'r', encoding='utf-8') as f:
+        licznik = 0
+        for line in f:
+            if co_szukac in line.lower() and (czego_nie is None or czego_nie not in line.lower()):
+                licznik += 1
+        return licznik
 # a) Count the number of lines containing python or Python 
+print(count_lines('./data/hacker_news.csv', 'python'))
 # b) Count the number lines containing JavaScript, javascript or Javascript 
+print(count_lines('./data/hacker_news.csv', 'javascript'))
 # c) Count the number lines containing Java and not JavaScript
+print(count_lines('./data/hacker_news.csv', 'java', 'javascript'))
