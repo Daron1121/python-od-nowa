@@ -128,9 +128,8 @@ class Statistics():
                 najwieksza = liczba
         return najwieksza
         
-    # todo !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     def get_range(self):
-        pass
+        return max(self.liczby) - min(self.liczby)
 
     def mean(self):
         return self.get_sum() / self.count()
@@ -147,10 +146,21 @@ class Statistics():
  
 
     def mode(self):
-        pass   
+        data = sorted(self.liczby)  
+        freq = {}
+        for liczba in data:
+            freq[liczba] = freq.get(liczba, 0) + 1
+        max_freq = max(freq.values())
+        modes = [k for k, v in freq.items() if v == max_freq]
+        return modes if len(modes) > 1 else modes[0]
 
     def std(self):
-        pass  
+        mean = self.get_sum() / self.count()
+        data = self.liczby
+        differences = []
+        for cos in data:
+            differences.append((cos - mean)**2)
+        return sum(differences) / len(differences)
 
     def var(self):
         pass    
