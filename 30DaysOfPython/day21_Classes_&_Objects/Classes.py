@@ -163,10 +163,22 @@ class Statistics():
         return sum(differences) / len(differences)
 
     def var(self):
-        pass    
+        mean = self.mean()
+        data_points_sqared = []
+        for every in self.liczby:
+            data_points_sqared.append((every-mean)**2)
+        suma = 0
+        for every in data_points_sqared:
+            suma += every
+        return suma/len(self.liczby)
 
     def freq_dist(self):
-        pass        
+        freq = {}
+        for liczba in self.liczby:
+            freq[liczba] = freq.get(liczba, 0) + 1
+        freq_sorted = sorted([(count * 100 / len(self.liczby), liczba) for liczba, count in freq.items()], reverse=True)
+        return freq_sorted   
+
 
 ages = [31, 26, 34, 37, 27, 26, 32, 32, 26, 27, 27, 24, 32, 33, 27, 25, 26, 38, 37, 31, 34, 24, 33, 29, 26]
 data = Statistics(ages)
