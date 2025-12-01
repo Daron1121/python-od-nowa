@@ -207,19 +207,58 @@ class PersonAccount():
         self.expenses = expenses
 
     def total_income(self):
-        pass
+        income_t = 0
+        for i in self.incomes:
+            income_t += i[1] 
+        return income_t
     
     def total_expense(self):
-        pass
+        expense = 0
+        for i in self.expenses:
+            expense += i[1] 
+        return expense
 
     def account_info(self):
-        pass
+        return f'''Account Owner: {self.firstname} {self.lastname}
+incomes: {[f"{name}: {amount}" for name, amount in self.incomes]}
+Expences: {[f"{name}: {amount}" for name, amount in self.expenses]}
+Total income: {self.total_income()}
+Total expenses: {self.total_expense()}
+Account balance: {self.account_balance()}'''
+        
 
-    def add_income(self):
-        pass
+    def add_income(self, name, amount):
+        self.incomes.append((name, amount))
+        return self.incomes
 
-    def add_expense(self):
-        pass
+    def add_expense(self, name, amount):
+        self.expenses.append((name, amount))
+        return self.expenses
 
     def account_balance(self):
-        pass
+        return account.total_income() - account.total_expense()
+
+account = PersonAccount(
+    firstname="Jan",
+    lastname="Kowalski",
+    incomes=[
+        ("pensja", 5000),
+        ("premia", 1200)
+    ],
+    expenses=[
+        ("czynsz", 1800),
+        ("jedzenie", 900)
+    ]
+)
+
+print(account.total_income())
+
+print(account.total_expense())
+
+print(account.account_info())
+
+print(account.add_income('wyplata', 3600))
+
+print(account.add_expense('wulkanizacja', 100))
+
+print(account.account_balance())
