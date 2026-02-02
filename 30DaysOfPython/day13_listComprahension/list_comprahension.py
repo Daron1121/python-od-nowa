@@ -238,3 +238,45 @@ print(compra(osoby))
 words = ["Python", "Lambda", "Comprehension"]
 dlugosc = lambda lista : reduce(lambda x, y: x + y, map(lambda w: len(w), lista))
 print(dlugosc(words))
+
+#! Exercises part 2 - after brake
+#Zad 1 Filter only negative and zero in the list using list comprehension
+numbers = [-4, -3, -2, -1, 0, 2, 4, 6]
+output = [i for i in numbers if i <= 0]
+print(output)
+
+#Zad 2 Flatten the following list of lists of lists to a one dimensional list :
+list_of_lists =[[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+'''
+output [1, 2, 3, 4, 5, 6, 7, 8, 9]
+'''
+
+output = [inner for outer in list_of_lists for inner in outer]
+print(output)
+
+#Zad 3 
+output = [(i,1,i**1,i**2,i**3,i**4,i**5) for i in range(11)]
+for i in output:
+    print(i)
+
+#Zad 4
+countries = [[('Finland', 'Helsinki')], [('Sweden', 'Stockholm')], [('Norway', 'Oslo')]]
+output = [[first.upper(), first.upper()[:3], last.upper()] for country in countries for first,last in country]
+print(output) 
+
+#Zad 5 
+output = [{'country': first, 'city': last} for country in countries for first,last in country]
+for i in output:
+    print(i)
+
+#Zad 6
+names = [[('Asabeneh', 'Yetayeh')], [('David', 'Smith')], [('Donald', 'Trump')], [('Bill', 'Gates')]]
+output = [f'{Name} {Surname}' for person in names for Name, Surname in person]
+print(output)
+
+#Zad 7 Write a lambda function which can solve a slope or y-intercept of linear functions.
+slope = lambda x1,x2,y1,y2:(y2 - y1)/(x2 - x1)
+print(slope(4,8,5,7))
+
+a = [1,2,3,4,5]
+print(a[1:3])
