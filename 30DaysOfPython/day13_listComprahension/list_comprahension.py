@@ -278,5 +278,34 @@ print(output)
 slope = lambda x1,x2,y1,y2:(y2 - y1)/(x2 - x1)
 print(slope(4,8,5,7))
 
-a = [1,2,3,4,5]
-print(a[1:3])
+#Zad 8 Przekształcenie danych
+# Mając listę:
+osoby = [("Anna", 18), ("Bartek", 22), ("Celina", 17), ("Dawid", 19)]
+# Użyj list comprehension i lambdy, by uzyskać tylko pełnoletnich w postaci:
+# [{'name': 'Bartek', 'age': 22}, {'name': 'Dawid', 'age': 19}]
+c = lambda lista: [{'name': f'{Imie}', 'age': f'{Wiek}'} for Imie, Wiek in lista]
+print(c(osoby))
+
+#* Lambda function - Data With Baara
+
+double = lambda x: x*2
+print(double(2))
+
+addition = lambda x,y: x + y
+print(addition(2, 6))
+
+prices = ['$12.50', '$9.99', '$100.00']
+print(list(map(lambda list1:float(list1[1:]),prices)))
+
+prices = [120, 30, 300, 80]
+print(list(filter(lambda x: x >= 100, prices)))
+
+students = [['Maria', 85], ['Kumar', 90], ['Max', 60]]
+print(list(filter(lambda row: row[1] > 70, students)))
+print(list(filter(lambda name: name[0].startswith('M '), students)))
+
+
+# List Comprahension - Data with Baara
+domains = ['www.google.com', 'openai.com', 'localhost', 'WWW.DATAWITHBARAA.COM']
+cleaned = [d.lower().replace('www.', '') for d in domains if '.' in d]
+print(cleaned)
