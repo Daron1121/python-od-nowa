@@ -120,7 +120,7 @@ print(len(set(age)))
 #Explain the difference between the following data types: string, list, tuple and set
 '''
 string - data type that contains plain text
-list - data type/structure that can have duplicates, and is indexed and modifiable and ordered
+list - data type/structure that can have duplicates, and is indexed, modifiable and ordered
 tuple - data type/structure that can have duplicates, and CANT change values for entire program, is unmodifable and ordered
 set - data type/structure that CANT have duplicates, is not indexed,unmodifable, and is randomized
 '''
@@ -129,3 +129,94 @@ set - data type/structure that CANT have duplicates, is not indexed,unmodifable,
 a = "I am a teacher and I love to inspire and teach people".split()
 print(set(a))
 print(f"There are {len(set(a))} unique words")
+
+#* DataWithBaraa - Set Episode
+new_set = {20,30,10, 40}
+new_set.add(50)
+new_set.update('Hi')
+
+# new_set.update({1,2})
+new_set |= {1,2}
+
+# a.remove(100) #*  remove pops an error when argument is missing
+new_set.discard(100) #* alternative for remove - dont pop error
+
+print(new_set) 
+
+a = {10,20,30,40}
+b = {30,40,50,60}
+
+# print(a.union(b))
+print(a | b)
+
+# print(a.intersection(b))
+print(a & b)
+
+# print(a.difference(b))
+# print(b.difference(a))
+print(a - b)
+print(b - a)
+
+# print(a.symmetric_difference(b))
+print(a ^ b)
+
+
+#Exercises Recap 
+
+it_companies = {'Facebook', 'Google', 'Microsoft', 'Apple', 'IBM', 'Oracle', 'Amazon'}
+
+#* Exercises: Level 1
+# 1 Find the length of the set it_companies
+print(len(it_companies))
+
+# Or
+
+output = 0
+for item in it_companies:
+    output += 1
+print(output)    
+# 2 Add 'Twitter' to it_companies
+it_companies.add('Twitter')
+# 3 Insert multiple IT companies at once to the set it_companies
+it_companies.update(['Altassaint', 'Nothing'])
+# 4 Remove one of the companies from the set it_companies
+it_companies.remove('Oracle')
+
+# 5 What is the difference between remove and discard
+#* .remove() removes element from set if it is an member of it, otherwise it will pop an error, .discard() in other hand if argument is not member, still will persue 
+
+print(it_companies)
+
+A = {19, 22, 24, 20, 25, 26}
+B = {19, 22, 20, 25, 26, 24, 28, 27}
+
+#* Exercises: Level 2
+# 6 Join A and B
+print(A.union(B))
+# 7 Find A intersection B
+print(A.intersection(B))
+# 8 Is A subset of B
+print(A.issubset(B))
+# 9 Are A and B disjoint sets
+print(A.isdisjoint(B))
+# 10 Join A with B and B with A
+print(A.union(B))
+print(B.union(A))
+# 11 What is the symmetric difference between A and B
+print(A.symmetric_difference(B))
+# 12 Delete the sets completely
+A.clear() 
+B.clear()
+
+age = [22, 19, 24, 25, 26, 24, 25, 24]
+
+#* Exercises: Level 3
+# 13 Convert the ages to a set and compare the length of the list and the set, which one is bigger?
+set_of_ages = set(age)
+print(f'Length of list: {len(age)} Length of set: {len(set_of_ages)}')
+print('Len of list is bigger because it contains duplicated values')
+
+string =  'I am a teacher and I love to inspire and teach people'
+# 14 How many unique words have been used in the sentence? Use the split methods and set to get the unique words.
+a = string.split()
+print(f'There are {len(set(a))} unique words in this sentecne')
