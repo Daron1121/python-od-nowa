@@ -12,14 +12,14 @@ def generate_full_name ():
     space = ' '
     full_name = first_name + space + last_name
     print(full_name)
-print(f'Function return : {generate_full_name()}')  
+# print(f'Function return : {generate_full_name()}')  
 
 def add_two_numbers ():
     num_one = 2
     num_two = 3
     total = num_one + num_two
     print(total)
-print(f'Function return : {add_two_numbers()}')
+# print(f'Function return : {add_two_numbers()}')
 #--------------------------------------------------------
 print(50* '-')
 def generate_full_name ():
@@ -28,14 +28,14 @@ def generate_full_name ():
     space = ' '
     full_name = first_name + space + last_name
     return full_name
-print(f'Function return : {generate_full_name()}')                  #* output is the returned value
+# print(f'Function return : {generate_full_name()}')                  #* output is the returned value
 
 def add_two_numbers ():
     num_one = 2
     num_two = 3
     total = num_one + num_two
     return total
-print(f'Function return : {add_two_numbers()}')                     #* output is the returned value
+# print(f'Function return : {add_two_numbers()}')                     #* output is the returned value
 #--------------------------------------------------------
 print(50* '-')
 # syntax
@@ -52,30 +52,30 @@ def greetings (name):
     message = name + ', welcome to Python for Everyone!'
     return message
 
-print(greetings('Asabeneh'))
+# print(greetings('Asabeneh'))
 
 def add_ten(num):
     ten = 10
     return num + ten
-print(add_ten(90))
+# print(add_ten(90))
 
 def square_number(x):
     return x * x
-print(square_number(2))
+# print(square_number(2))
 
 def area_of_circle (r):
     PI = 3.14
     area = PI * r ** 2
     return area
-print(area_of_circle(10))
+# print(area_of_circle(10))
 
 def sum_of_numbers(n):
     total = 0
     for i in range(n+1):
         total+=i
     return total
-print(sum_of_numbers(10)) # 55
-print(sum_of_numbers(100)) # 5050
+# print(sum_of_numbers(10)) # 55
+# print(sum_of_numbers(100)) # 5050
 
 #--------------------------------------------------------
 print(50* '-')
@@ -84,23 +84,23 @@ def generate_full_name (first_name, last_name):
     space = ' '
     full_name = first_name + space + last_name
     return full_name
-print('Full Name: ', generate_full_name('Asabeneh','Yetayeh'))
+# print('Full Name: ', generate_full_name('Asabeneh','Yetayeh'))
 
 def sum_two_numbers (num_one, num_two):
     sum = num_one + num_two
     return sum
-print('Sum of two numbers: ', sum_two_numbers(1, 9))
+# print('Sum of two numbers: ', sum_two_numbers(1, 9))
 
 def calculate_age (current_year, birth_year):
     age = current_year - birth_year
     return age;
 
-print('Age: ', calculate_age(2021, 1819))
+# print('Age: ', calculate_age(2021, 1819))
 
 def weight_of_object (mass, gravity):
     weight = str(mass * gravity)+ ' N' # the value has to be changed to a string first
     return weight
-print('Weight of an object in Newtons: ', weight_of_object(100, 9.81))
+# print('Weight of an object in Newtons: ', weight_of_object(100, 9.81))
 
 #--------------------------------------------------------
 print(50* '-')
@@ -109,7 +109,7 @@ def sum_all_nums(*nums):
     for num in nums:
         total += num     # same as total = total + num 
     return total
-print(sum_all_nums(2, 3, 5)) # 10
+# print(sum_all_nums(2, 3, 5)) # 10
 
 #--------------------------------------------------------
 #* Exercises
@@ -452,4 +452,62 @@ def most_populated_countries(lista):
         name_and_population[name] = population
     top_10 = sorted(name_and_population.items(), key=lambda x: x[1], reverse=True)[:10]
     return top_10
-print(most_populated_countries(nowalista))
+print(most_populated_countries(nowalista)) 
+
+
+#!DataWithBaraa recap
+def string_cleaner(first_name, last_name, country='n/a'):
+    first = first_name.strip().lower()
+    last = last_name.strip().lower()
+    return f'{first} {last} from {country}'
+print(string_cleaner(country='DE', last_name='SMITH  ', first_name=' MariA  '))
+print(string_cleaner(first_name=' kuMar  ', last_name='SuReSh  '))
+
+def total(*values):
+    return sum(values)
+print(total(1,2,3,4))
+
+def create_user(**values):
+    return f'{values['first_name']} {values['last_name']} is from {values['country']} and he is {values['age']} years old'
+print(create_user(first_name='Mo',last_name='Salah', age='33', country='Egypt'))
+
+#* Action function!
+def write_log(message):
+   with open(r"C:\Users\wszts\Desktop\30DaysOfPython\30DaysOfPython\day11_functions\app.log", 'a') as file:
+        file.write(message + "\n")
+
+# write_log("App Started")
+# write_log("User logged in")
+# write_log("App Stopped")
+
+#* Transformation function!
+def clean_email(email: str):
+    username = email[:email.find('@')]
+    domain = email[email.find('@')+1:]
+    return {'username': username.strip().lower(), 'domain': domain.strip().lower()}
+print(clean_email('  filiptErelak1@gmail.com '))
+
+#* Validation function!
+def is_valid_password(password):
+    return len(password) >= 8
+print(is_valid_password('1234567'))
+print(is_valid_password('123456789'))
+
+def is_valid_email(email: str):
+    return '@' in email and '.' in email
+print(is_valid_email('filipterelak1@gmail.com'))
+
+def full_email_check(email):
+    write_log('App Started')
+    # We must check if it is valid
+    # If it is not valid we log the problem
+    if is_valid_email(email):
+        cleaned = clean_email(email)
+        write_log(f'Processed Email: {cleaned}')
+    # If it is valid we clan it and stroe structured information
+    else:
+        write_log(f'Incorrect email recived: {email}')
+    write_log('App Ended')
+
+mail = input('Please enter your email: ')
+full_email_check(mail)

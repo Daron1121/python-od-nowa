@@ -1,0 +1,9 @@
+App Started
+Processed Email: {'username': 'emailtest', 'domain': 'local.host'}
+App Ended
+App Started
+Incorrect email recived: abc
+App Ended
+App Started
+Incorrect email recived: abc
+App Ended
