@@ -509,5 +509,92 @@ def full_email_check(email):
         write_log(f'Incorrect email recived: {email}')
     write_log('App Ended')
 
-mail = input('Please enter your email: ')
-full_email_check(mail)
+# mail = input('Please enter your email: ')
+# full_email_check(mail)
+
+
+#Exercises
+# 9 Declare a function named reverse_list. It takes an array as a parameter and it returns the reverse of the array (use loops).
+def reverse_list(arr: list):
+    reversed_l = []
+    for item in range(len(arr)-1, -1, -1):
+        reversed_l.append(arr[item])
+    return reversed_l
+print(reverse_list([1,2,3,4,5]))
+print(reverse_list(["A", "B", "C"]))
+# or
+# def rev(arr):
+#     return arr[::-1]
+# print(rev([1,2,3,4,5]))
+
+# 10 Declare a function named capitalize_list_items. It takes a list as a parameter and it returns a capitalized list of items
+def capitalize_list_items(lista: list):
+    nowa = []
+    for item in lista:
+        nowa.append(item.upper())
+    return nowa
+print(capitalize_list_items(['Potato', 'Tomato', 'Mango', 'Milk']))
+
+# 14 Declare a function named sum_of_odds. It takes a number parameter and it adds all the odd numbers in that range.
+
+def sum_of_odds(rangeof):
+    suma = 0
+    for liczba in range(rangeof + 1):
+        if liczba % 2 != 0:
+            suma += liczba
+        else:
+            continue
+    return suma
+print(sum_of_odds(10))
+
+# 15 Declare a function named sum_of_even. It takes a number parameter and it adds all the even numbers in that - range.
+def sum_of_even(rangeof):
+    suma = 0
+    for liczba in range(rangeof + 1):
+        if liczba % 2 == 0:
+            suma += liczba
+        else:
+            continue
+    return suma
+print(sum_of_even(10))
+
+# 16 Declare a function named evens_and_odds . It takes a positive integer as parameter and it counts number of evens and odds in the number.
+def evens_and_odds(rangeof):
+    suma_odd = 0
+    suma_even = 0
+    for liczba in range(rangeof + 1):
+        if liczba % 2 == 0:
+            suma_even += 1
+        else:
+            suma_odd += 1
+    return f'The number of odds are {suma_odd} \nThe number of evens are {suma_even}'
+print(evens_and_odds(100))
+
+# 19 Write different functions which take lists. They should calculate_mean, calculate_median, calculate_mode, calculate_range, calculate_variance, calculate_std (standard deviation).
+def calculate_mean(arr: list):
+    return sum(arr)/len(arr)
+print(calculate_mean([1,2,3,4,5,6,7]))
+
+def calculate_median(arr: list):
+    arr = sorted(arr)
+    n = len(arr)
+    mid = n //2
+
+    if n % 2 == 0:
+        return (arr[mid] + arr[mid - 1])/2
+    return arr[mid]
+
+print(calculate_median([7,2,3,4,5,6,7]))
+print(calculate_median([7,2,3,4,5,6,7,2]))
+
+def calculate_mode(arr: list):
+    pass
+
+def calculate_range(arr: list):
+    pass
+
+def calculate_variance(arr: list):
+    pass
+
+def calculate_std(arr: list):
+    pass
