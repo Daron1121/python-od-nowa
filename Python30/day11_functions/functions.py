@@ -588,13 +588,30 @@ print(calculate_median([7,2,3,4,5,6,7]))
 print(calculate_median([7,2,3,4,5,6,7,2]))
 
 def calculate_mode(arr: list):
-    pass
+    matching = {}
+    for item in arr:
+        if item in matching:
+            matching[item] += 1
+        else:
+            matching[item] = 1
+    print(matching.items())
+    sorted_dict = sorted(matching.items(), key=lambda item: item[1])
+    return f'Item {sorted_dict[-1][0]} is mode of arr and it occured {sorted_dict[-1][1]} times'
+print(calculate_mode([7,2,3,4,5,6,7,7,3,1,45,7,3]))
 
 def calculate_range(arr: list):
-    pass
+    return max(arr) - min(arr)
+print(calculate_range([7,2,3,1,4,5,6,7,7,3,10,4,7,3]))
 
 def calculate_variance(arr: list):
-    pass
+    mean = calculate_mean(arr)
+    square_results = []
+    for item in arr:
+        square_results.append((item - mean)**2) 
+    return sum(square_results)/(len(square_results) - 1)
+print(calculate_variance([7,2,3,1,4,5,6,7,7,3,10,4,7,3]))
 
+import math
 def calculate_std(arr: list):
-    pass
+    return math.sqrt(calculate_variance(arr))
+print(calculate_std([7,2,3,1,4,5,6,7,7,3,10,4,7,3]))
