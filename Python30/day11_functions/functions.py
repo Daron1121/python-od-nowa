@@ -615,3 +615,50 @@ import math
 def calculate_std(arr: list):
     return math.sqrt(calculate_variance(arr))
 print(calculate_std([7,2,3,1,4,5,6,7,7,3,10,4,7,3]))
+#Lvl 3
+# 1 Write a function called is_prime, which checks if a number is prime.
+def is_prime(number: int):
+    dzielniki = 0
+    for x in range(1, number + 1):
+        if number % x == 0:
+            dzielniki += 1
+    return dzielniki == 2
+print(is_prime(7))
+print(is_prime(6))
+print(is_prime(5))
+print(is_prime(3))
+
+# 2 Write a functions which checks if all items are unique in the list.
+def is_unique(lista: list):
+    posortowane = sorted(lista)
+    print(posortowane)
+    for number in range(1, len(posortowane)):
+        if posortowane[number] == posortowane[number - 1]:
+            return False
+        else:
+            continue
+    return True
+print(is_unique([1,2,3,4,5,6,7]))
+'''
+lub:
+def is_unique(lista: list):
+    return len(lista) == len(set(lista))
+'''
+# 3 Write a function which checks if all the items of the list are of the same data type.
+def is_same_data_type(items: list):
+    if not items:
+        return True
+
+    for item in items:
+        if type(item) != type(items[0]):
+            return False
+    return True
+print(is_same_data_type([1, 2, 3]))        # True
+print(is_same_data_type([1, "2", 3]))      # False
+print(is_same_data_type([]))               # True
+print(is_same_data_type([1.0, 2.5, 3.1]))  # True
+
+# 4 Write a function which check if provided variable is a valid python variable
+# 5 Go to the data folder and access the countries-data.py file.
+# 6 Create a function called the most_spoken_languages in the world. It should return 10 or 20 most spoken languages in the world in descending order
+# 7 Create a function called the most_populated_countries. It should return 10 or 20 most populated countries in descending order.
