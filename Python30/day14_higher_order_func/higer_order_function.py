@@ -272,3 +272,61 @@ for c in sorted_population[:5]:
 
 # Sort out the ten most spoken languages by location.
 # Sort out the ten most populated countries.
+
+def outer():
+    x = 10
+
+    def inner():
+        return x
+
+    return inner
+result = outer()
+print(result())
+
+def counter():
+    count = 0
+
+    def increment():
+        nonlocal count
+        count += 1
+        return count
+
+    return increment
+c = counter()
+print(c())  # 1
+print(c())  # 2
+print(c())
+
+# ! Recap - exercises chat GPT (Higher order function + closure)
+def threshold_filter(threshold):
+    def filters(lista):
+        po_filtracji = []
+        for element in lista:
+            if element > threshold:
+                po_filtracji.append(element)
+        return po_filtracji
+    return filters
+
+greater_than_10 = threshold_filter(10)
+print(greater_than_10([5, 12, 7, 20])) 
+
+def greet(name):
+    return f"Hello {name}"
+
+def call_counter(func):
+    count = 0
+
+    def licznik(wiadomosc):
+        nonlocal count
+        count += 1
+        return func(wiadomosc)
+    licznik.calls = lambda: count
+    return licznik
+
+counted_greet = call_counter(greet)
+
+print(counted_greet("Ala"))
+print(counted_greet("Ola"))
+print(counted_greet("Jan"))
+
+print(counted_greet.calls())

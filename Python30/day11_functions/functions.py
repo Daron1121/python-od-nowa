@@ -657,8 +657,3 @@ print(is_same_data_type([1, 2, 3]))        # True
 print(is_same_data_type([1, "2", 3]))      # False
 print(is_same_data_type([]))               # True
 print(is_same_data_type([1.0, 2.5, 3.1]))  # True
-
-# 4 Write a function which check if provided variable is a valid python variable
-# 5 Go to the data folder and access the countries-data.py file.
-# 6 Create a function called the most_spoken_languages in the world. It should return 10 or 20 most spoken languages in the world in descending order
-# 7 Create a function called the most_populated_countries. It should return 10 or 20 most populated countries in descending order.
