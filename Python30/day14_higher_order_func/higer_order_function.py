@@ -330,3 +330,124 @@ print(counted_greet("Ola"))
 print(counted_greet("Jan"))
 
 print(counted_greet.calls())
+
+
+# Zadanie 3 — Memoization (real interview classic)
+# Zaimplementuj prostą memoizację bez dekoratora
+# Wymagania:
+# użyj closure
+# użyj słownika jako cache
+# klucz = argument funkcji
+def slow_square(x):
+    print("Calculating...")
+    return x * x
+    
+def memoize(func):
+    cache = {}
+    def sprawdzanie(kwadrat):
+        nonlocal cache
+        if kwadrat in cache:
+            return cache[kwadrat]
+        else:
+            odpowiedz = func(kwadrat)
+            cache[kwadrat] = odpowiedz
+            return odpowiedz
+    return sprawdzanie
+fast_square = memoize(slow_square)
+print(fast_square(4))  # Calculating... -> 16
+print(fast_square(4))  # 16 (już nie drukuje)
+print(fast_square(5))  # Calculating... -> 25
+print(fast_square(5))  # 25 (z cache)
+
+
+
+
+# 🔥 Zadanie 4 — Funkcja budująca pipeline
+# Ma zwrócić funkcję, która wykonuje funkcje po kolei.
+# Wymagania:
+# użyj closure
+# działa dla dowolnej liczby funkcji
+def add2(x): 
+    return x + 2
+def mul3(x):
+    return x * 3
+
+def compose(*functions):
+    pass
+
+pipeline = compose(add2, mul3)
+
+print(pipeline(4))  # (4 + 2) * 3 = 18
+
+
+# 🔥 Zadanie 5 — Dynamiczna walidacja (bardziej DE style)
+
+# Napisz funkcję:
+
+# def validator(rules):
+#     ...
+
+
+# Gdzie rules to lista funkcji walidujących.
+
+# Ma zwrócić funkcję, która:
+
+# przyjmuje wartość
+
+# zwraca True tylko jeśli wszystkie reguły są spełnione
+
+# Przykład:
+# def is_positive(x): return x > 0
+# def is_even(x): return x % 2 == 0
+
+# validate_number = validator([is_positive, is_even])
+
+# print(validate_number(4))   # True
+# print(validate_number(3))   # False
+
+# 🔥 Zadanie 6 — Pułapka late binding
+
+# Wyjaśnij i napraw ten kod:
+
+# functions = []
+
+# for i in range(5):
+#     def f():
+#         return i
+#     functions.append(f)
+
+# print([f() for f in functions])
+
+
+# Oczekiwany wynik:
+
+# [0, 1, 2, 3, 4]
+
+# 💣 Zadanie 7 — Advanced (bardzo interview)
+
+# Napisz funkcję:
+
+# def once(func):
+#     ...
+
+
+# która sprawia, że dana funkcja może zostać wykonana tylko raz.
+
+# Przykład:
+
+# @once
+# def initialize():
+#     print("Initializing...")
+
+# initialize()  # działa
+# initialize()  # nic się nie dzieje
+
+
+# Nie używaj klasy.
+
+# 📈 Poziomy trudności
+
+# 1–2 → solid junior
+# 3–4 → mid
+# 5–6 → strong mid
+# 7 → senior-level thinking
