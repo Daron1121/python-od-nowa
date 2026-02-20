@@ -371,39 +371,59 @@ def add2(x):
     return x + 2
 def mul3(x):
     return x * 3
+def mul8(x):
+    return x * 8
 
 def compose(*functions):
-    pass
+    def kolejna_funkcja(y):
+        wynik = y
+        for kazda_funckja in functions:
+            wynik = kazda_funckja(wynik)
+        return wynik
 
-pipeline = compose(add2, mul3)
+    return kolejna_funkcja
+
+pipeline = compose(add2, mul3, mul8)
 
 print(pipeline(4))  # (4 + 2) * 3 = 18
 
 
 # 🔥 Zadanie 5 — Dynamiczna walidacja (bardziej DE style)
-
 # Napisz funkcję:
-
-# def validator(rules):
-#     ...
-
-
 # Gdzie rules to lista funkcji walidujących.
-
 # Ma zwrócić funkcję, która:
-
 # przyjmuje wartość
-
 # zwraca True tylko jeśli wszystkie reguły są spełnione
 
 # Przykład:
-# def is_positive(x): return x > 0
-# def is_even(x): return x % 2 == 0
+def is_positive(x):
+     return x > 0
+def is_even(x):
+     return x % 2 == 0
 
-# validate_number = validator([is_positive, is_even])
+def validator(rules):
+    
+    def rule_checker(number):
+        for rule in rules:
+            if rule(number):
+                continue
+            else:
+                return False
+        return True
+        
+    return rule_checker   
 
-# print(validate_number(4))   # True
-# print(validate_number(3))   # False
+validate_number = validator([is_positive, is_even])
+
+print(validate_number(4))   # True
+print(validate_number(3))   # False
+
+
+
+
+
+
+
 
 # 🔥 Zadanie 6 — Pułapka late binding
 
