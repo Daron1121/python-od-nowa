@@ -315,7 +315,6 @@ def greet(name):
 
 def call_counter(func):
     count = 0
-
     def licznik(wiadomosc):
         nonlocal count
         count += 1
@@ -420,15 +419,8 @@ print(validate_number(3))   # False
 
 
 
-
-
-
-
-
 # 🔥 Zadanie 6 — Pułapka late binding
-
 # Wyjaśnij i napraw ten kod:
-
 # functions = []
 
 # for i in range(5):
@@ -438,36 +430,50 @@ print(validate_number(3))   # False
 
 # print([f() for f in functions])
 
+# Oczekiwany wynik: [0, 1, 2, 3, 4]
 
-# Oczekiwany wynik:
+# (Moje rozwiazanie) Funkcja jest wywolywana w pamieci dopiero po zakonczeniu petli w print() jako obiekt gdy i = 4 (zapamietana przez funkcje wartosc dla jego zewnetrznego zakresu [closure])
+# for i in range(5):
+#     def f():
+#         return i
+#     functions.append(f())
 
-# [0, 1, 2, 3, 4]
+# # print([f() for f in functions])
+# print(functions)
+# Podobno zle? ^^^^
+
+functions = []
+
+for i in range(5):
+    def f(i=i): #! Zapamietuje aktualna wartosc dla i w obiekcie funkcji
+        return i
+    functions.append(f)
+
+print([f() for f in functions])
+
+#* Argumenty domyślne są obliczane w momencie definiowania funkcji, więc każda funkcja dostaje swoją kopię i
+
 
 # 💣 Zadanie 7 — Advanced (bardzo interview)
-
-# Napisz funkcję:
-
-# def once(func):
-#     ...
-
-
-# która sprawia, że dana funkcja może zostać wykonana tylko raz.
-
-# Przykład:
-
-# @once
-# def initialize():
-#     print("Initializing...")
-
-# initialize()  # działa
-# initialize()  # nic się nie dzieje
-
-
+# Napisz funkcję która sprawia, że dana funkcja może zostać wykonana tylko raz.
 # Nie używaj klasy.
 
-# 📈 Poziomy trudności
+def once(func):
+    czy_wykonana = False
 
-# 1–2 → solid junior
-# 3–4 → mid
-# 5–6 → strong mid
-# 7 → senior-level thinking
+    def wrapper(*args, **kwargs):
+        nonlocal czy_wykonana
+        if czy_wykonana == False:
+            czy_wykonana = True
+            return func()
+        else:
+            return
+            
+    return wrapper
+
+@once
+def initialize():
+    print("Initializing...")
+
+initialize()  # działa
+initialize()  # nic się nie dzieje
