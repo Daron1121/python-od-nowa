@@ -477,3 +477,153 @@ def initialize():
 
 initialize()  # działa
 initialize()  # nic się nie dzieje
+
+#! Decoratory
+
+# Zadanie 1 — Logger (basic)
+# Napisz dekorator który:
+# wypisuje nazwę funkcji przed jej wykonaniem
+# wypisuje wynik po wykonaniu
+# działa dla dowolnej liczby argumentów
+# Przykład:
+# Calling add with args (2, 3)
+# Result: 5
+
+def logger(func):
+
+    def wrapper(*args, **kwargs):
+        print(func.__name__)
+        result = func(*args, **kwargs)
+        return result
+
+    return wrapper
+
+@logger
+def add(*li):
+    return sum(li)
+
+print(add(2,3,67,7))
+
+# 🟢 Zadanie 2 — Timer
+# Który:
+# mierzy czas wykonania funkcji
+# wypisuje ile sekund trwało wykonanie
+# działa dla dowolnych argumentów
+from time import time, sleep
+def timer(func):
+    def wrapper(*args, **kwargs):
+        start = time()
+        result = func(*args, **kwargs)
+        end = time()
+        print(f'Function worked for {end - start} seconds')
+        return result
+
+    return wrapper
+
+@timer
+def sleeps(time):
+    return sleep(time)
+
+print(sleeps(2))
+
+
+# 🟡 Zadanie 3 — Repeat
+# Który:
+# powoduje, że funkcja wykona się N razy
+# N jest przekazane do dekoratora
+# To jest pierwszy poziom, gdzie masz:
+# dekorator, który przyjmuje argumenty
+
+def repeat(n):
+    def decorator(func):
+        def wrapper(*args, **kwargs):
+            for printing in range(n):
+                result = func(*args, **kwargs)
+                print(result)
+            return f'Function was repeated {n} times'
+        return wrapper
+    return decorator
+
+@repeat(3)
+def greet(name):
+    return f'Hello {name}!'
+
+print(greet(input('Input your name! ')))
+
+
+
+# 🟡 Zadanie 4 — Only Positive Arguments
+# Napisz dekorator:
+# def only_positive(func):
+#     ...
+# Który:
+# sprawdza czy wszystkie argumenty pozycyjne są > 0
+# jeśli nie → rzuca wyjątek
+# jeśli tak → wywołuje funkcję normalnie
+
+
+
+# 🟡 Zadanie 5 — Cache (memoize jako dekorator)
+# Zrób dekorator:
+# @memoize
+# def fib(n):
+#     ...
+# Który:
+# zapamiętuje wyniki
+# nie liczy drugi raz tej samej wartości
+# działa dla wielu argumentów
+
+
+
+
+# 🔴 Zadanie 6 — Once (rozszerzone)
+# Rozszerz swoje once, żeby:
+# zapamiętywał wynik pierwszego wywołania
+# przy kolejnych wywołaniach zwracał ten sam wynik
+# nie wykonywał funkcji ponownie
+
+
+
+
+# 🔴 Zadanie 7 — Access Control (interview classic)
+# Napisz dekorator:
+# @require_role("admin")
+# def delete_user():
+#     ...
+# Załóż, że istnieje globalna zmienna:
+# current_user_role = "user"
+# Dekorator ma:
+# sprawdzać czy rola się zgadza
+# jeśli nie → rzucić wyjątek
+# jeśli tak → wykonać funkcję
+
+
+
+
+# 🔴 Zadanie 8 — Call Counter (production-level)
+# Napisz dekorator, który:
+# liczy ile razy funkcja została wywołana
+# zapisuje tę liczbę jako atrybut funkcji:
+# my_func.calls
+# Nie używaj klasy.
+
+
+
+
+# 💣 Zadanie 9 — Retry (bardzo interview)
+# Napisz dekorator:
+# @retry(3)
+# def unstable():
+#     ...
+# Który:
+# jeśli funkcja rzuci wyjątek,
+# próbuje wykonać ją ponownie maksymalnie N razy
+# jeśli dalej się nie uda → rzuca wyjątek
+
+
+
+# 💣 Zadanie 10 — Rate Limiter
+# Napisz dekorator, który:
+# pozwala wywołać funkcję maksymalnie N razy
+# kolejne wywołania rzucają wyjątek
+# Bez użycia klasy.
