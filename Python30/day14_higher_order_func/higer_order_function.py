@@ -453,31 +453,6 @@ print([f() for f in functions])
 
 #* Argumenty domyślne są obliczane w momencie definiowania funkcji, więc każda funkcja dostaje swoją kopię i
 
-
-# 💣 Zadanie 7 — Advanced (bardzo interview)
-# Napisz funkcję która sprawia, że dana funkcja może zostać wykonana tylko raz.
-# Nie używaj klasy.
-
-def once(func):
-    czy_wykonana = False
-
-    def wrapper(*args, **kwargs):
-        nonlocal czy_wykonana
-        if czy_wykonana == False:
-            czy_wykonana = True
-            return func()
-        else:
-            return
-            
-    return wrapper
-
-@once
-def initialize():
-    print("Initializing...")
-
-initialize()  # działa
-initialize()  # nic się nie dzieje
-
 #! Decoratory
 
 # Zadanie 1 — Logger (basic)
@@ -524,7 +499,7 @@ def timer(func):
 def sleeps(time):
     return sleep(time)
 
-print(sleeps(2))
+# print(sleeps(2))
 
 
 # 🟡 Zadanie 3 — Repeat
@@ -548,31 +523,66 @@ def repeat(n):
 def greet(name):
     return f'Hello {name}!'
 
-print(greet(input('Input your name! ')))
+# print(greet(input('Input your name! ')))
 
 
 
 # 🟡 Zadanie 4 — Only Positive Arguments
-# Napisz dekorator:
-# def only_positive(func):
-#     ...
-# Który:
+# Napisz dekorator który:
 # sprawdza czy wszystkie argumenty pozycyjne są > 0
 # jeśli nie → rzuca wyjątek
 # jeśli tak → wywołuje funkcję normalnie
 
+def only_positive(func):
+    def wrapper(*args, **kwargs):
+        for num in args:
+            if num < 0:
+                raise Exception('No numbers below 0!')
+                
+        result = func(*args, **kwargs)
+        return result
+    return wrapper
 
+@only_positive
+def rectangle(a,b):
+    return a * b
 
+# print(rectangle(3,-2))
+ 
 # 🟡 Zadanie 5 — Cache (memoize jako dekorator)
-# Zrób dekorator:
-# @memoize
-# def fib(n):
-#     ...
-# Który:
+# Zrób dekorator który:
 # zapamiętuje wyniki
 # nie liczy drugi raz tej samej wartości
 # działa dla wielu argumentów
+def zapamietana(func):
+    cashe = {}
 
+    def wrapper(*args, **kwargs):
+        key = args
+        if kwargs:
+            key += tuple(sorted(kwargs.items()))
+
+        if key in cashe:
+            return cashe[key]
+
+        result = func(*args, **kwargs)
+        cashe[key] = result
+        return result
+
+    return wrapper
+
+@zapamietana
+def fib(n):
+    poprzednia = 0
+    aktualna = 1
+    for _ in range(n):
+        nowa = poprzednia + aktualna
+        poprzednia = aktualna
+        aktualna = nowa
+    return aktualna
+
+print(fib(6))
+print(fib(6))
 
 
 
@@ -583,21 +593,54 @@ print(greet(input('Input your name! ')))
 # nie wykonywał funkcji ponownie
 
 
+def once(func):
+    czy_wykonana = False
+    to_return = None
+
+    def wrapper(*args, **kwargs):
+        nonlocal czy_wykonana, to_return
+        if czy_wykonana == False:
+            czy_wykonana = True
+            result = func(*args, **kwargs)
+            to_return = result
+            return result
+        else:
+            return to_return
+            
+    return wrapper
+
+@once
+def initialize():
+    return "Initializing..."
+
+print(initialize())
+print(initialize()) 
 
 
 # 🔴 Zadanie 7 — Access Control (interview classic)
-# Napisz dekorator:
-# @require_role("admin")
-# def delete_user():
-#     ...
 # Załóż, że istnieje globalna zmienna:
-# current_user_role = "user"
 # Dekorator ma:
 # sprawdzać czy rola się zgadza
 # jeśli nie → rzucić wyjątek
 # jeśli tak → wykonać funkcję
+current_user_role = "admin" #!Change here to check!
 
+def require_role(role):
+    def decorator(func):
+        def wrapper(*args, **kwargs):
+            if role == current_user_role:
+                return func(*args, **kwargs)
+            else:
+                raise PermissionError("You dont have permission to do that!")
+        return wrapper
+    return decorator
 
+@require_role("admin")
+def delete_user():
+    return 'User deleted!'
+
+# print(delete_user())
+# print(delete_user())
 
 
 # 🔴 Zadanie 8 — Call Counter (production-level)
@@ -627,3 +670,29 @@ print(greet(input('Input your name! ')))
 # pozwala wywołać funkcję maksymalnie N razy
 # kolejne wywołania rzucają wyjątek
 # Bez użycia klasy.
+
+
+# Killer Zadanie — once_per_args
+
+# Napisz dekorator:
+
+# def once_per_args(func):
+#     ...
+
+# 🎯 Wymagania:
+
+# Funkcja ma wykonać się tylko raz dla danego zestawu argumentów.
+
+# Jeśli zostanie wywołana ponownie z tymi samymi argumentami:
+
+# nie wykonuje się ponownie
+
+# zwraca zapamiętany wynik
+
+# Jeśli argumenty są inne — ma wykonać się normalnie.
+
+# Nie używaj klasy.
+
+# Użyj closure.
+
+# Obsłuż *args i **kwargs.
