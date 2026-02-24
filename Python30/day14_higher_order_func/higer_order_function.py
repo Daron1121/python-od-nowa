@@ -618,11 +618,11 @@ print(initialize())
 
 
 # 🔴 Zadanie 7 — Access Control (interview classic)
-# Załóż, że istnieje globalna zmienna:
 # Dekorator ma:
 # sprawdzać czy rola się zgadza
 # jeśli nie → rzucić wyjątek
 # jeśli tak → wykonać funkcję
+# Załóż, że istnieje globalna zmienna:
 current_user_role = "admin" #!Change here to check!
 
 def require_role(role):
@@ -649,8 +649,25 @@ def delete_user():
 # zapisuje tę liczbę jako atrybut funkcji:
 # my_func.calls
 # Nie używaj klasy.
+def called(func):
+    calls = 0
+    def wrapper(*args, **kwargs):
+        nonlocal calls
+        calls += 1
+        wrapper.calls = calls
+        return func(*args, **kwargs)
+    wrapper.calls = 0
+    return wrapper
 
 
+@called
+def my_func():
+    return 'Wykonano!'
+
+print(my_func())
+print(my_func())
+print(my_func())
+print(my_func.calls)
 
 
 # 💣 Zadanie 9 — Retry (bardzo interview)
@@ -662,37 +679,45 @@ def delete_user():
 # jeśli funkcja rzuci wyjątek,
 # próbuje wykonać ją ponownie maksymalnie N razy
 # jeśli dalej się nie uda → rzuca wyjątek
+def retry(N):
+    def decorator(func):
+        def wrapper(*args, **kwarg):
+            last_exception = None
+            for _ in range(N):
+                try:   
+                    result = func(*args, **kwarg)
+                    return result
+                except Exception as e:
+                    last_exception = e
+            raise last_exception
+        return wrapper
+    return decorator
 
+import random
 
+@retry(5)
+def unstable():
+    if random.random() < 0.7:
+        raise ValueError("Random failure")
+    return "Success!"
 
+print(unstable())
 # 💣 Zadanie 10 — Rate Limiter
 # Napisz dekorator, który:
 # pozwala wywołać funkcję maksymalnie N razy
 # kolejne wywołania rzucają wyjątek
-# Bez użycia klasy.
 
 
-# Killer Zadanie — once_per_args
-
+#! 💣 Killer  Zadanie 11 — once_per_args
 # Napisz dekorator:
-
 # def once_per_args(func):
-#     ...
-
+#    ...
 # 🎯 Wymagania:
-
 # Funkcja ma wykonać się tylko raz dla danego zestawu argumentów.
-
 # Jeśli zostanie wywołana ponownie z tymi samymi argumentami:
-
 # nie wykonuje się ponownie
-
 # zwraca zapamiętany wynik
-
 # Jeśli argumenty są inne — ma wykonać się normalnie.
-
 # Nie używaj klasy.
-
 # Użyj closure.
-
 # Obsłuż *args i **kwargs.
