@@ -702,12 +702,33 @@ def unstable():
     return "Success!"
 
 print(unstable())
+
+
+
 # 💣 Zadanie 10 — Rate Limiter
 # Napisz dekorator, który:
 # pozwala wywołać funkcję maksymalnie N razy
 # kolejne wywołania rzucają wyjątek
+def Limiter(N):
+    def decorator(func):
+        used = 0
+        def wrapper(*args, **kwargs):
+            nonlocal used
+            if used >= N:
+                raise PermissionError("Rate limit exceeded")
 
+            used += 1
+            result = func(*args, **kwargs)
+            return result
+        return wrapper
+    return decorator
 
+@Limiter(1) 
+def funkcja_testowa():
+    return 'Test'
+
+print(funkcja_testowa())
+# print(funkcja_testowa())
 #! 💣 Killer  Zadanie 11 — once_per_args
 # Napisz dekorator:
 # def once_per_args(func):
@@ -718,6 +739,22 @@ print(unstable())
 # nie wykonuje się ponownie
 # zwraca zapamiętany wynik
 # Jeśli argumenty są inne — ma wykonać się normalnie.
-# Nie używaj klasy.
 # Użyj closure.
 # Obsłuż *args i **kwargs.
+def once_per_args(func):
+    used = {}
+    def wrapper(*args, **kwargs):
+        key = (args, tuple(sorted(kwargs.items())))
+        if key in used:
+            return used[key]
+        result = func(*args, **kwargs)
+        used[key] = result
+        return result
+    return wrapper
+
+@once_per_args
+def suma(*args, **kwargs):
+    return sum(args) + sum(kwargs.values())
+print(suma(1,b=2,c=3))
+print(suma(1,2,3))
+print(suma(1,2,3))
