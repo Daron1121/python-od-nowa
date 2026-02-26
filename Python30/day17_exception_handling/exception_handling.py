@@ -207,3 +207,270 @@ for name, score in zip(names,scores):
 # 3. Charlie - 78
 for i, (name, score) in enumerate(zip(names,scores)):
     print(f"{i}. {name} - {score}")
+
+
+# 💣 Zadanie 1 — Bezpieczny Agregator Danych
+# 📌 Wymagania:
+# Każdy record to słownik:
+# {"name": "Alice", "age": 30, "score": 80}
+# Funkcja ma:
+# połączyć rekordy
+#* policzyć średni score
+#* zwrócić listę imion wraz z indeksem (użyj enumerate)
+#* jeśli któryś rekord nie ma klucza → obsłuż wyjątek
+# options może zawierać:
+# min_score=... → filtruj rekordy
+# fields=("name","score") → zwracaj tylko te pola (użyj unpackingu dict)
+#* Jeśli records jest puste → rzuć własny wyjątek. 
+
+def aggregate_data(*records, **options):
+    if not records:
+            raise ValueError('You need to provide at least 1 record')
+
+    min_score = options.get('min_score')
+    fields = options.get("fields")
+
+    valid_records = []
+
+    for record in records:
+        try:
+            score = record["score"]
+        except KeyError:
+            raise KeyError("Record missing 'score'")
+        
+        if min_score is None or score >= min_score:
+            valid_records.append(record)
+
+    if fields:
+        valid_records = [{k: r[k] for k in fields} for r in valid_records]  
+
+    avg_score = sum([x['score'] for x in valid_records])/len(valid_records)
+    names = list(enumerate([x['name'] for x in valid_records]))
+
+    return {"avg_score": avg_score, "names": names, "records": valid_records}
+    
+print(aggregate_data({"name": "Alice", "score": 80},
+              {"name": "Bob", "score": 70},
+              {"name": "Charlie", "score": 90, 'age': 18},
+              {"name": "Charlie", 'score': -1},
+              fields = ("name", "score"),
+              min_score=0))
+
+# 💣 Zadanie 2 — Walidator Argumentów API
+# 🎯 Cel:
+# Napisz funkcję:
+# def api_call(endpoint, *args, **kwargs):
+# 📌 Wymagania:
+# Endpoint musi być stringiem → inaczej TypeError
+# *args to parametry pozycyjne
+# **kwargs to parametry query
+# Funkcja ma:
+# połączyć args i kwargs w jeden słownik
+# użyć unpackingu (**) do merge dict
+# wypisać parametry jako pary używając zip
+# Jeśli którykolwiek argument jest None → ValueError
+
+
+
+
+# 💣 Zadanie 3 — Bezpieczne Zipowanie List
+# 📌 Wymagania:
+#* Funkcja przyjmuje dowolną liczbę list.
+#* Jeśli listy mają różną długość:
+#* rzuć wyjątek z informacją która lista ma inną długość (użyj enumerate)
+# Zwróć wynik klasycznego zip
+# Obsłuż przypadek, gdy ktoś przekaże coś co nie jest iterowalne.
+
+def safe_zip(*lists):
+    if not lists:
+        raise ValueError('No list provided')
+
+    for obj in lists:
+        try:
+            iter(obj)
+        except TypeError:
+            raise ValueError("You need to provide only iterable lists")
+
+    lengths = [len(x) for x in lists]
+    standard_length = max(set(lengths), key=lengths.count)
+    
+    for idx, obj in enumerate(lists):
+        if len(obj) != standard_length:
+            raise ValueError(f'Your list at index {idx} is different from others')
+
+
+    return list(zip(*lists))
+
+print(safe_zip(['a', 'b','c','d'],[1,2,3,4],['1','2','3','4']))
+# 💣 Zadanie 4 — Rozpakowywanie Konfiguracji
+
+# Masz:
+
+# default_config = {
+#     "host": "localhost",
+#     "port": 5432,
+#     "debug": False
+# }
+
+
+# Napisz funkcję:
+
+# def build_config(**overrides):
+
+# 📌 Wymagania:
+
+# Użyj spreading ({**dict1, **dict2})
+
+# Jeśli ktoś poda klucz spoza default_config → rzuć wyjątek
+
+# Zwróć finalny config
+
+# Obsłuż brak override
+
+# 💣 Zadanie 5 — Wielopoziomowe Rozpakowanie
+
+# Masz dane:
+
+# data = [
+#     ("Alice", [10, 20, 30]),
+#     ("Bob", [5, 15, 25]),
+# ]
+
+# 🎯 Napisz funkcję:
+# def process_scores(data):
+
+# 📌 Wymagania:
+
+# Użyj unpackingu w pętli:
+
+# for name, scores in data:
+
+
+# Użyj *scores w wywołaniu innej funkcji
+
+# Policz średnią
+
+# Użyj enumerate do indeksowania
+
+# Jeśli scores nie jest listą → wyjątek
+
+# 💣 Zadanie 6 — Dynamiczny Kalkulator
+
+# Napisz:
+
+# def calculator(operation, *numbers):
+
+# 📌 Wymagania:
+
+# operation może być:
+
+# "add"
+
+# "mul"
+
+# "div"
+
+# Użyj unpackingu przy przekazywaniu do pomocniczych funkcji.
+
+# Obsłuż:
+
+# dzielenie przez 0
+
+# brak argumentów
+
+# Zwróć wynik
+
+# Użyj *numbers w helperze.
+
+# 💣 Zadanie 7 — Merge z Konfliktami
+
+# Napisz:
+
+# def merge_dicts(*dicts, strategy="override"):
+
+# 📌 Wymagania:
+
+# Użyj unpackingu dict.
+
+# Jeśli strategy="override" → późniejsze nadpisują wcześniejsze.
+
+# Jeśli strategy="error" → przy konflikcie rzuć wyjątek.
+
+# Użyj enumerate, żeby wskazać który dict spowodował konflikt.
+
+# 💣 Zadanie 8 — Bezpieczne Rozpakowanie CSV
+
+# Masz:
+
+# rows = [
+#     ("Alice", 30, "IT"),
+#     ("Bob", "wrong_age", "HR"),
+# ]
+
+# 🎯 Napisz funkcję:
+# def parse_rows(rows):
+
+# 📌 Wymagania:
+
+# Użyj unpackingu:
+
+# name, age, department = row
+
+
+# Jeśli age nie jest int → obsłuż wyjątek
+
+# Zwróć poprawne rekordy
+
+# Użyj enumerate, żeby raportować numer wiersza
+
+# 💣 Zadanie 9 — Universal Wrapper
+
+# Napisz funkcję:
+
+# def execute(func, *args, **kwargs):
+
+# 📌 Wymagania:
+
+# Wywołuje dowolną funkcję
+
+# Obsługuje wyjątki
+
+# Zwraca:
+
+# {"status": "ok", "result": ...}
+
+
+# lub
+
+# {"status": "error", "message": ...}
+
+
+# Użyj unpackingu do wywołania
+
+# 💣 Zadanie 10 — Advanced Data Transformer (najtrudniejsze)
+
+# Masz dane:
+
+# users = [
+#     {"name": "Alice", "scores": [10, 20, 30]},
+#     {"name": "Bob", "scores": [5, 15]},
+# ]
+
+
+# Napisz:
+
+# def transform_users(*users, min_avg=None):
+
+# 📌 Wymagania:
+
+# Użyj unpackingu list i dict
+
+# Użyj enumerate
+
+# Oblicz średnią
+
+# Filtrowanie po min_avg
+
+# Obsłuż brak kluczy
+
+# Zwróć wynik jako listę krotek (index, name, avg)
