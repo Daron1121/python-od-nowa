@@ -256,10 +256,8 @@ print(aggregate_data({"name": "Alice", "score": 80},
               fields = ("name", "score"),
               min_score=0))
 
-# 💣 Zadanie 2 — Walidator Argumentów API
+#! 💣 Zadanie 2 — Walidator Argumentów API
 # 🎯 Cel:
-# Napisz funkcję:
-# def api_call(endpoint, *args, **kwargs):
 # 📌 Wymagania:
 # Endpoint musi być stringiem → inaczej TypeError
 # *args to parametry pozycyjne
@@ -270,8 +268,8 @@ print(aggregate_data({"name": "Alice", "score": 80},
 # wypisać parametry jako pary używając zip
 # Jeśli którykolwiek argument jest None → ValueError
 
-
-
+def api_call(endpoint, *args, **kwargs):
+    pass
 
 # 💣 Zadanie 3 — Bezpieczne Zipowanie List
 # 📌 Wymagania:
@@ -298,179 +296,128 @@ def safe_zip(*lists):
         if len(obj) != standard_length:
             raise ValueError(f'Your list at index {idx} is different from others')
 
-
     return list(zip(*lists))
 
 print(safe_zip(['a', 'b','c','d'],[1,2,3,4],['1','2','3','4']))
+
 # 💣 Zadanie 4 — Rozpakowywanie Konfiguracji
-
-# Masz:
-
-# default_config = {
-#     "host": "localhost",
-#     "port": 5432,
-#     "debug": False
-# }
-
-
-# Napisz funkcję:
-
-# def build_config(**overrides):
-
 # 📌 Wymagania:
-
 # Użyj spreading ({**dict1, **dict2})
-
 # Jeśli ktoś poda klucz spoza default_config → rzuć wyjątek
-
 # Zwróć finalny config
-
 # Obsłuż brak override
+from copy import deepcopy
+
+default_config = {
+    "host": "localhost",
+    "port": 5432,
+    "debug": False
+}
+def build_config(**overrides):
+    new_config = deepcopy(default_config)
+
+    if not overrides:
+        return new_config
+
+    for key in overrides:
+        if key not in default_config:
+            raise ValueError(f"You need to provide only keys from default config, there is no '{key}'") 
+        else:
+            new_config[key] = overrides[key]
+    return new_config
+print(build_config(port=8000, debug=True))
 
 # 💣 Zadanie 5 — Wielopoziomowe Rozpakowanie
-
-# Masz dane:
-
-# data = [
-#     ("Alice", [10, 20, 30]),
-#     ("Bob", [5, 15, 25]),
-# ]
-
-# 🎯 Napisz funkcję:
-# def process_scores(data):
-
 # 📌 Wymagania:
-
-# Użyj unpackingu w pętli:
-
-# for name, scores in data:
-
-
-# Użyj *scores w wywołaniu innej funkcji
-
-# Policz średnią
-
+#* Użyj unpackingu w pętli:
+#* for name, scores in data:
+#* Użyj *scores w wywołaniu innej funkcji
+#* Policz średnią
 # Użyj enumerate do indeksowania
+#* Jeśli scores nie jest listą → wyjątek
+data = [
+    ("Alice", [10, 20, 30]),
+    ("Bob", [5, 15, 25]),
+]
 
-# Jeśli scores nie jest listą → wyjątek
+def avgs(*scores):
+    return sum(scores)/len(scores)
+
+def process_scores(data):
+    persons = []
+    for idx, (name,score) in enumerate(data):
+        if not isinstance(score, list):
+            raise ValueError(f'You must provide scores as list. Not valid {score}')
+        avg_score = avgs(*score)
+        persons.append([idx, name,avg_score])
+
+    return persons
+
+print(process_scores(data))
 
 # 💣 Zadanie 6 — Dynamiczny Kalkulator
-
 # Napisz:
-
 # def calculator(operation, *numbers):
-
 # 📌 Wymagania:
-
 # operation może być:
-
 # "add"
-
 # "mul"
-
 # "div"
-
 # Użyj unpackingu przy przekazywaniu do pomocniczych funkcji.
-
 # Obsłuż:
-
 # dzielenie przez 0
-
 # brak argumentów
-
 # Zwróć wynik
-
 # Użyj *numbers w helperze.
 
 # 💣 Zadanie 7 — Merge z Konfliktami
-
 # Napisz:
-
 # def merge_dicts(*dicts, strategy="override"):
-
 # 📌 Wymagania:
-
 # Użyj unpackingu dict.
-
 # Jeśli strategy="override" → późniejsze nadpisują wcześniejsze.
-
 # Jeśli strategy="error" → przy konflikcie rzuć wyjątek.
-
 # Użyj enumerate, żeby wskazać który dict spowodował konflikt.
 
 # 💣 Zadanie 8 — Bezpieczne Rozpakowanie CSV
-
 # Masz:
-
 # rows = [
 #     ("Alice", 30, "IT"),
 #     ("Bob", "wrong_age", "HR"),
 # ]
-
 # 🎯 Napisz funkcję:
 # def parse_rows(rows):
-
 # 📌 Wymagania:
-
 # Użyj unpackingu:
-
 # name, age, department = row
-
-
 # Jeśli age nie jest int → obsłuż wyjątek
-
 # Zwróć poprawne rekordy
-
 # Użyj enumerate, żeby raportować numer wiersza
 
 # 💣 Zadanie 9 — Universal Wrapper
-
 # Napisz funkcję:
-
 # def execute(func, *args, **kwargs):
-
 # 📌 Wymagania:
-
 # Wywołuje dowolną funkcję
-
 # Obsługuje wyjątki
-
 # Zwraca:
-
 # {"status": "ok", "result": ...}
-
-
 # lub
-
 # {"status": "error", "message": ...}
-
-
 # Użyj unpackingu do wywołania
 
 # 💣 Zadanie 10 — Advanced Data Transformer (najtrudniejsze)
-
 # Masz dane:
-
 # users = [
 #     {"name": "Alice", "scores": [10, 20, 30]},
 #     {"name": "Bob", "scores": [5, 15]},
 # ]
-
-
 # Napisz:
-
 # def transform_users(*users, min_avg=None):
-
 # 📌 Wymagania:
-
 # Użyj unpackingu list i dict
-
 # Użyj enumerate
-
 # Oblicz średnią
-
 # Filtrowanie po min_avg
-
 # Obsłuż brak kluczy
-
 # Zwróć wynik jako listę krotek (index, name, avg)
