@@ -356,8 +356,6 @@ def process_scores(data):
 print(process_scores(data))
 
 # 💣 Zadanie 6 — Dynamiczny Kalkulator
-# Napisz:
-# def calculator(operation, *numbers):
 # 📌 Wymagania:
 # operation może być:
 # "add"
@@ -366,18 +364,81 @@ print(process_scores(data))
 # Użyj unpackingu przy przekazywaniu do pomocniczych funkcji.
 # Obsłuż:
 # dzielenie przez 0
-# brak argumentów
-# Zwróć wynik
+#* brak argumentów
+#* Zwróć wynik
 # Użyj *numbers w helperze.
+def add(*numbers):
+    return sum(numbers)
+
+def mul(*numbers):
+    result = 1
+    for number in numbers:
+        result *= number
+    return result
+
+def div(*numbers):
+    result = numbers[0]
+    for idx in range(1,len(numbers)):
+        result /= numbers[idx]
+    return result
+
+def calculator(operation, *numbers):
+    if not numbers:
+        raise ValueError('You need to provide numbers for equation')
+
+    if operation == 'div' and 0 in numbers[1:]:
+        raise ZeroDivisionError("You cant divide by 0!")
+
+    possible = {'add': add,'mul': mul, 'div': div}
+
+    if operation not in possible:
+        raise ValueError(f"Invalid operation: {operation}")
+
+    to_call = possible[operation]
+    return to_call(*numbers)
+
+print(calculator('div', 8,2,2))
 
 # 💣 Zadanie 7 — Merge z Konfliktami
-# Napisz:
-# def merge_dicts(*dicts, strategy="override"):
 # 📌 Wymagania:
 # Użyj unpackingu dict.
 # Jeśli strategy="override" → późniejsze nadpisują wcześniejsze.
 # Jeśli strategy="error" → przy konflikcie rzuć wyjątek.
 # Użyj enumerate, żeby wskazać który dict spowodował konflikt.
+
+default_config = {"host": "localhost", "port": 5432}
+env_config = {"port": 8080}
+user_config = {"debug": True}
+
+def merge_dicts(*dicts, strategy="override"):
+    result = {}
+
+    for idx, obj in enumerate(dicts):
+        for key, value in obj.items():
+            if key in result:
+                if strategy == 'error':
+                    raise ValueError(f"Your config at '{idx}' is overriding earlier config")
+            result.update(dicts[idx]) 
+    return result
+
+    #! aktualny kod z pomoca chatu
+
+    #! Wczesniejszy kod - samemu
+    
+    # end_config_override = {}
+    # keys = []
+    # for idx, obj in enumerate(dicts):
+    #     keys += obj.keys() 
+    #     if strategy == 'error': 
+    #         if len(keys) != len(set(keys)): 
+    #             raise ValueError(f"Your config at '{idx}' is overriding earlier config ") 
+    #         else: 
+    #             end_config_override.update(dicts[idx]) 
+    #     elif strategy == 'override': 
+    #         end_config_override.update(dicts[idx]) 
+    # return end_config_override
+
+print(merge_dicts(default_config,env_config,user_config))
 
 # 💣 Zadanie 8 — Bezpieczne Rozpakowanie CSV
 # Masz:
