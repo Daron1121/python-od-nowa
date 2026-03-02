@@ -441,13 +441,6 @@ def merge_dicts(*dicts, strategy="override"):
 print(merge_dicts(default_config,env_config,user_config))
 
 # 💣 Zadanie 8 — Bezpieczne Rozpakowanie CSV
-# Masz:
-# rows = [
-#     ("Alice", 30, "IT"),
-#     ("Bob", "wrong_age", "HR"),
-# ]
-# 🎯 Napisz funkcję:
-# def parse_rows(rows):
 # 📌 Wymagania:
 # Użyj unpackingu:
 # name, age, department = row
@@ -455,9 +448,30 @@ print(merge_dicts(default_config,env_config,user_config))
 # Zwróć poprawne rekordy
 # Użyj enumerate, żeby raportować numer wiersza
 
+rows = [
+    ("Alice", 30, "IT"),
+    ("Bob", 'Invalid', "HR"),
+    ("Mia", 41, "IT"),
+    ("John", 'Invalid', "IT"),
+    ("Mark", 24, "BHP"),
+]
+
+def parse_rows(rows):
+    result = []
+    problems = []
+
+    for idx, row in enumerate(rows):
+        name, age, department = row
+        if not isinstance(age, int):
+            problems.append(idx)
+            continue
+        result.append(row)
+
+    return result, problems
+
+print(parse_rows(rows)) 
+
 # 💣 Zadanie 9 — Universal Wrapper
-# Napisz funkcję:
-# def execute(func, *args, **kwargs):
 # 📌 Wymagania:
 # Wywołuje dowolną funkcję
 # Obsługuje wyjątki
@@ -467,14 +481,21 @@ print(merge_dicts(default_config,env_config,user_config))
 # {"status": "error", "message": ...}
 # Użyj unpackingu do wywołania
 
+def execute(func, *args, **kwargs):
+    execution = {'status': None}
+    try:
+        result = func(*args, **kwargs)
+    except Exception as e:
+        execution['status'] = 'error'
+        execution['message'] = str(e)
+        return execution
+    execution['status'] = 'ok'
+    execution['result'] = result
+    return execution
+
+print(execute(merge_dicts,default_config,env_config,user_config))
+
 # 💣 Zadanie 10 — Advanced Data Transformer (najtrudniejsze)
-# Masz dane:
-# users = [
-#     {"name": "Alice", "scores": [10, 20, 30]},
-#     {"name": "Bob", "scores": [5, 15]},
-# ]
-# Napisz:
-# def transform_users(*users, min_avg=None):
 # 📌 Wymagania:
 # Użyj unpackingu list i dict
 # Użyj enumerate
@@ -482,3 +503,10 @@ print(merge_dicts(default_config,env_config,user_config))
 # Filtrowanie po min_avg
 # Obsłuż brak kluczy
 # Zwróć wynik jako listę krotek (index, name, avg)
+
+users = [
+    {"name": "Alice", "scores": [10, 20, 30]},
+    {"name": "Bob", "scores": [5, 15]},
+]
+def transform_users(*users, min_avg=None):
+    pass
