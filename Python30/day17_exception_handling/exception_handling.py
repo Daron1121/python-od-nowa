@@ -256,20 +256,34 @@ print(aggregate_data({"name": "Alice", "score": 80},
               fields = ("name", "score"),
               min_score=0))
 
-#! 💣 Zadanie 2 — Walidator Argumentów API
+# 💣 Zadanie 2 — Walidator Argumentów API
 # 🎯 Cel:
 # 📌 Wymagania:
-# Endpoint musi być stringiem → inaczej TypeError
+#* Endpoint musi być stringiem → inaczej TypeError
 # *args to parametry pozycyjne
 # **kwargs to parametry query
 # Funkcja ma:
-# połączyć args i kwargs w jeden słownik
-# użyć unpackingu (**) do merge dict
+#* połączyć args i kwargs w jeden słownik
+#* użyć unpackingu (**) do merge dict
 # wypisać parametry jako pary używając zip
 # Jeśli którykolwiek argument jest None → ValueError
 
 def api_call(endpoint, *args, **kwargs):
-    pass
+    if not isinstance(endpoint, str):
+        raise TypeError(f"Endpoint must be a string type! '{endpoint}'")
+
+    args_dict = {}
+    for idx, obj in enumerate(args):
+        args_dict[f"args_{idx}"] = obj
+
+    merged = {**args_dict, **kwargs}
+
+    if None in merged.values():
+        raise ValueError("Arguments cannot contain None!")
+
+    return list(zip(merged.keys(), merged.values()))
+
+print(api_call("/users", 12, 13, 201, limit=10, active=True))
 
 # 💣 Zadanie 3 — Bezpieczne Zipowanie List
 # 📌 Wymagania:
@@ -498,15 +512,35 @@ print(execute(merge_dicts,default_config,env_config,user_config))
 # 💣 Zadanie 10 — Advanced Data Transformer (najtrudniejsze)
 # 📌 Wymagania:
 # Użyj unpackingu list i dict
-# Użyj enumerate
-# Oblicz średnią
+#* Użyj enumerate
+#* Oblicz średnią
 # Filtrowanie po min_avg
-# Obsłuż brak kluczy
+#* Obsłuż brak kluczy
 # Zwróć wynik jako listę krotek (index, name, avg)
 
 users = [
     {"name": "Alice", "scores": [10, 20, 30]},
     {"name": "Bob", "scores": [5, 15]},
 ]
-def transform_users(*users, min_avg=None):
-    pass
+def transform_users(users, min_avg=None):
+    result = []
+
+    for idx, obj in enumerate(users):
+        name = obj.get('name')
+        scores = obj.get('scores')
+
+        if not isinstance(scores, list):
+            raise ValueError("You need to provide scores in a list")
+
+        if not name or not scores:
+            raise ValueError(f'You need to provide valid data at index {idx}')
+
+        obj_avg = sum(scores)/len(scores)
+
+        if min_avg is not None and obj_avg < min_avg:
+            continue
+
+        result.append((idx, name, obj_avg))
+    return result
+
+print(transform_users(users))
