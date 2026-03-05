@@ -138,13 +138,13 @@ if time1 > '12:00:00':
     print(f"{stime}:{datetime.strftime(currentdt,'%M:%S')} PM")
 else:
     print(f"{time1} AM")
-print(time1)
+# print(time1)
 
 datestr = "2025-10-15 14:30:00"
 dateobj = datetime.strptime(datestr, "%Y-%m-%d %H:%M:%S")
-print(dateobj)
+# print(dateobj)
 ndatestr = datetime.strftime(dateobj, "%d %b %Y, %#I:%M %p")
-print(ndatestr)
+# print(ndatestr)
 
 # Comparing Dates
 # Write a program that takes two dates and prints which one comes earlier.
@@ -162,13 +162,13 @@ datau = '2026-05-11'# datau = input('Input date of your birthday (e.g. "YYYY-MM-
 datau = datetime.strptime(datau, "%Y-%m-%d")
 datanow = datetime.now()
 hmuchis = datau - datanow
-print(hmuchis)
+# print(hmuchis)
 
 # Working with timedelta
 # Given a meeting that starts at "2025-10-15 09:00:00" and lasts 2 hours 30 minutes, calculate the end time.
 meetdate = datetime(year=2025, month=10, day=15, hour=9, minute=00, second=00)
 howlong = timedelta(hours=2, minutes=30)
-print(meetdate + howlong)
+# print(meetdate + howlong)
 
 # Find the Difference Between Two Dates
 # Calculate how many days, hours, and minutes have passed since "2020-01-01".
@@ -178,7 +178,7 @@ total_seconds = now.total_seconds()
 dni = now.days
 godziny = int((total_seconds // 3600) % 24)   # pełne godziny po odjęciu dni
 minuty = int((total_seconds // 60) % 60)  
-print(f"From {kiedy} passed {dni} days, {godziny} hours and {minuty} minutes")
+# print(f"From {kiedy} passed {dni} days, {godziny} hours and {minuty} minutes")
 
 # Parse Multiple Date Formats
 # Write a function that can correctly parse any of the following:
@@ -198,7 +198,7 @@ def date_changer(date1):
         return "Unknown date format"
     else:
         return dateobj
-print(date_changer(datestr))
+# print(date_changer(datestr))
 
 # Generate a List of Dates
 # Create a list of all dates between two given dates (inclusive).
@@ -206,23 +206,23 @@ dat1 = date(2025,11,5)
 dat2 = date(2025,11,10)
 times = (dat2 - dat1).days 
 a = [dat1 + timedelta(days=i) for i in range(times + 1)]
-print(a)
-print([d.isoformat() for d in a])
+# print(a)
+# print([d.isoformat() for d in a])
 
 # 🔵 Advanced Exercises
 # Week Number and Day of the Year
 # Print the current week number (ISO calendar) and the day number of the year.
 now = datetime.now()
-print(f"Current week number (ISO Callendar): {now.isocalendar().week}")
-print(f"Current day number of the year: {now.timetuple().tm_yday}")
+# print(f"Current week number (ISO Callendar): {now.isocalendar().week}")
+# print(f"Current day number of the year: {now.timetuple().tm_yday}")
 
 # Timezone Handling
 # Display the current UTC time and convert it to your local timezone (using zoneinfo).
 
 utc_now = datetime.utcnow()
 local_now = datetime.now()
-print("UTC Time:", utc_now)
-print("Local Time:", local_now)
+# print("UTC Time:", utc_now)
+# print("Local Time:", local_now)
 
 # Next Monday Finder
 # Write a function that, given any date, returns the date of the next Monday.
@@ -241,7 +241,7 @@ def next_monday(g_date):
 
     next_mon = dateobj + timedelta(days=days_until_monday)
     return f"Next Monday will be on: {next_mon.date()}"
-print(next_monday("2025-10-19"))
+# print(next_monday("2025-10-19"))
     
 
 # Scheduling Simulation
@@ -265,13 +265,13 @@ now = datetime.now(timezone.utc)
 # Find the next event that’s still upcoming
 upcoming = [t for t in date_converted if t > now]
 
-if upcoming:
-    next_event = min(upcoming)
-    minutes_remaining = int((next_event - now).total_seconds() / 60)
-    print(f"Next event: {next_event}")
-    print(f"Minutes remaining: {minutes_remaining}")
-else:
-    print("No upcoming events.")
+# if upcoming:
+#     next_event = min(upcoming)
+#     minutes_remaining = int((next_event - now).total_seconds() / 60)
+#     print(f"Next event: {next_event}")
+#     print(f"Minutes remaining: {minutes_remaining}")
+# else:
+#     print("No upcoming events.")
 
 
 # Countdown Timer
@@ -292,7 +292,7 @@ validtimestmaps = []
 for timestamp1 in timestamps:
     if datetime.fromisoformat(timestamp1.replace("Z","")) > datanow - timedelta(days=7):
         validtimestmaps.append(timestamp1)
-print(validtimestmaps) 
+# print(validtimestmaps) 
 
 
 # ⚫ Expert / Real-World Projects
@@ -330,7 +330,7 @@ duration = flight_duration(
     "2025-10-25T09:00:00", "Europe/Warsaw"
 )
 
-print(f"Czas lotu: {duration}")
+# print(f"Czas lotu: {duration}")
 
 
 # Recurring Task Generator
@@ -355,4 +355,263 @@ def generate_meetings(start_date, weekday):
     for iter in meetings:
         to_return.append(iter.strftime('%d-%m-%Y'))
     return f'Meetings of next 90 days on {to_return}'
-print(generate_meetings(date(2025,10,21), 'Monday'))
+# print(generate_meetings(date(2025,10,21), 'Monday'))
+
+
+#* IMPORTY 
+from datetime import datetime, timedelta
+
+# 💣 Zadanie 1 — Podstawowe informacje o czasie (MID)
+# Wymagania
+# Napisz funkcję:
+# def datetime_info(dt):
+# która zwróci słownik:
+# {
+#     "year": ...,
+#     "month": ...,
+#     "day": ...,
+#     "hour": ...,
+#     "minute": ...
+# }
+# 📌 użyj atrybutów datetime.
+
+dt = datetime.now()
+
+def datetime_info(dt):
+    result = {
+    "year": dt.year,
+    "month": dt.month,
+    "day": dt.day,
+    "hour": dt.hour,
+    "minute": dt.minute
+    }
+    return result
+print(datetime_info(dt))
+
+# 💣 Zadanie 2 — Formatowanie czasu (strftime)
+# Wymagania
+# Napisz funkcję:
+# def format_datetime(dt):
+# która zwróci string w formacie:
+# 2025-05-17 14:35
+# 📌 użyj strftime
+
+dt = datetime(2025, 5, 17, 14, 35)
+
+def format_datetime(dt):
+    return dt.strftime("%Y-%m-%d %H:%M")
+
+print(format_datetime(dt))
+
+# 💣 Zadanie 3 — Parsowanie daty ze stringa (strptime)
+# Wymagania
+# Napisz funkcję:
+# def parse_datetime(text):
+# która:
+# 1️⃣ zamieni string na datetime
+# 2️⃣ zwróci obiekt datetime
+# 📌 użyj strptime
+dates = "2025-06-01 18:30"
+
+def parse_datetime(text):
+    return datetime.strptime(text, '%Y-%m-%d %H:%M')
+print(parse_datetime(dates))
+
+# 💣 Zadanie 4 — Różnica między datami
+# Wymagania
+# Napisz funkcję:
+# def days_between(date1, date2):
+# która zwróci:
+# 9
+# 📌 użyj datetime i timedelta
+
+d1 = "2025-06-01"
+d2 = "2025-06-10"
+
+
+def days_between(date1, date2):
+    dt1 = datetime.strptime(date1, '%Y-%m-%d')
+    dt2 = datetime.strptime(date2, '%Y-%m-%d')
+    return abs((dt2 - dt1).days)
+
+print(days_between(d1, d2))
+
+# 💣 Zadanie 5 — Filtrowanie dat
+# Wymagania
+# Napisz funkcję:
+# def filter_future_dates(dates):
+# która zwróci tylko daty większe niż dzisiejsza data.
+# 📌 użyj datetime.today()
+
+dates = [
+    "2026-05-10",
+    "2024-12-01",
+    "2026-03-05"
+] 
+
+def filter_future_dates(dates):
+    now = datetime.today()
+    result = []
+
+    for date in dates:
+        to_check = datetime.strptime(date, '%Y-%m-%d') 
+
+        if to_check > now:
+            result.append(date) 
+    return result
+
+print(filter_future_dates(dates))
+
+# 💣 Zadanie 6 — Czas trwania wydarzeń (timedelta)
+# Dane
+# events = [
+#     ("Meeting", "2025-06-01 10:00", "2025-06-01 11:30"),
+#     ("Workshop", "2025-06-02 09:00", "2025-06-02 12:00")
+# ]
+# Wymagania
+# Napisz funkcję:
+# def event_durations(events):
+# która zwróci:
+# [
+# ("Meeting", 90),
+# ("Workshop", 180)
+# ]
+# czyli czas wydarzenia w minutach.
+# 📌 użyj strptime i timedelta
+
+# 💣 Zadanie 7 — Walidator dat
+# Dane
+# dates = [
+#     "2025-05-10",
+#     "2025-15-10",
+#     "invalid"
+# ]
+# Wymagania
+# Napisz funkcję:
+# def validate_dates(dates):
+# która:
+# parsuje daty
+# błędne zapisuje w liście errors
+# poprawne w valid
+# zwraca:
+# (valid_dates, errors)
+# 📌 użyj try / except
+
+# 💣 Zadanie 8 — Najbliższe wydarzenie
+# Dane
+# events = [
+#     ("Meeting", "2025-06-10 12:00"),
+#     ("Lunch", "2025-05-01 13:00"),
+#     ("Conference", "2025-07-20 09:00")
+# ]
+# Wymagania
+# Napisz funkcję:
+# def next_event(events):
+# która zwróci najbliższe wydarzenie w przyszłości względem datetime.now().
+
+# 💣 Zadanie 9 — Grupowanie wydarzeń po dniu
+# Dane
+# events = [
+# ("Meeting", "2025-06-01 10:00"),
+# ("Lunch", "2025-06-01 13:00"),
+# ("Workshop", "2025-06-02 09:00")
+# ]
+# Wymagania
+# Napisz funkcję:
+# def group_by_day(events):
+# która zwróci:
+# {
+# "2025-06-01": ["Meeting", "Lunch"],
+# "2025-06-02": ["Workshop"]
+# }
+# 📌 użyj .date() z datetime.
+
+# 💣 Zadanie 10 — Advanced Time Analyzer (HARD)
+# Dane
+# logs = [
+# ("Alice", "2025-06-01 09:00", "2025-06-01 17:00"),
+# ("Bob", "2025-06-01 10:30", "2025-06-01 18:00"),
+# ("Alice", "2025-06-02 09:15", "2025-06-02 16:30")
+# ]
+# Wymagania
+# Napisz funkcję:
+# def analyze_work_time(logs):
+# która zwróci:
+# {
+# "Alice": total_hours,
+# "Bob": total_hours
+# }
+# 📌 wymagania:
+# parsuj datetime
+# policz różnice
+# użyj timedelta
+# konwersja na godziny
+
+# 💣 Zadanie 11 — Overlap Checker (Senior level)
+# Dane
+# meetings = [
+# ("A", "2025-06-01 10:00", "2025-06-01 11:00"),
+# ("B", "2025-06-01 10:30", "2025-06-01 11:30"),
+# ("C", "2025-06-01 12:00", "2025-06-01 13:00")
+# ]
+# Wymagania
+# Napisz funkcję:
+# def detect_overlaps(meetings):
+# która zwróci wszystkie pary spotkań które się nakładają.
+
+# 💣 Zadanie 12 — Real World Log Parser (najtrudniejsze)
+# Dane
+# logs = [
+# "2025-06-01 09:00 | LOGIN | Alice",
+# "2025-06-01 09:15 | LOGIN | Bob",
+# "2025-06-01 10:00 | LOGOUT | Alice",
+# "2025-06-01 11:00 | LOGOUT | Bob"
+# ]
+# Wymagania
+# Napisz funkcję:
+# def session_times(logs):
+# która zwróci:
+# {
+# "Alice": session_minutes,
+# "Bob": session_minutes
+# }
+# 📌 wymagania:
+# parsowanie stringów
+# datetime
+# timedelta
+# parowanie login / logout
+
+# REAL TASK 1 — Log Analyzer
+# Masz logi:
+# 2025-06-01 09:00 request_start
+# 2025-06-01 09:00 request_end
+# Policz:
+# średni czas requestu
+# max request
+# min request
+
+# REAL TASK 2 — API Rate Limit
+# Masz logi requestów:
+# user_id timestamp
+# Znajdź użytkowników którzy:
+# > 100 requestów w 1 minutę
+# REAL TASK 3 — Booking System
+# Masz rezerwacje:
+# start_time
+# end_time
+# Sprawdź czy nowa rezerwacja koliduje.
+
+# REAL TASK 4 — Data Pipeline
+# Masz rekordy:
+# event_time
+# processing_time
+# Policz lag pipeline.
+
+# REAL TASK 5 — User Activity
+# Masz logi:
+# login
+# logout
+# Policz:
+# średni czas sesji
+# najdłuższą sesję
+# aktywnych użytkowników per dzień
