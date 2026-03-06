@@ -463,11 +463,6 @@ def filter_future_dates(dates):
 print(filter_future_dates(dates))
 
 # 💣 Zadanie 6 — Czas trwania wydarzeń (timedelta)
-# Dane
-# events = [
-#     ("Meeting", "2025-06-01 10:00", "2025-06-01 11:30"),
-#     ("Workshop", "2025-06-02 09:00", "2025-06-02 12:00")
-# ]
 # Wymagania
 # Napisz funkcję:
 # def event_durations(events):
@@ -479,13 +474,27 @@ print(filter_future_dates(dates))
 # czyli czas wydarzenia w minutach.
 # 📌 użyj strptime i timedelta
 
+events = [
+    ("Meeting", "2025-06-01 10:00", "2025-06-01 11:30"),
+    ("Workshop", "2025-06-02 09:00", "2025-06-02 12:00")
+]
+
+def event_durations(events):
+    result = []
+    for name, start, end in events:
+        if end < start:
+            raise ValueError("End time before start")
+        
+        start = datetime.strptime(start, '%Y-%m-%d %H:%M')
+        end = datetime.strptime(end, '%Y-%m-%d %H:%M')
+        duration = end - start
+        duration = duration.total_seconds()
+        result.append((name, int(duration/60)))
+    return result
+
+print(event_durations(events))
+
 # 💣 Zadanie 7 — Walidator dat
-# Dane
-# dates = [
-#     "2025-05-10",
-#     "2025-15-10",
-#     "invalid"
-# ]
 # Wymagania
 # Napisz funkcję:
 # def validate_dates(dates):
@@ -497,17 +506,38 @@ print(filter_future_dates(dates))
 # (valid_dates, errors)
 # 📌 użyj try / except
 
+dates = [
+    "2025-05-10",
+    "2025-15-10",
+    "invalid"
+]
+
+def validate_dates(dates):
+    result = ([], [])
+    for date_text in dates:
+        try:
+            datetime.strptime(date_text, '%Y-%d-%m')
+            result[0].append(date_text)
+        except Exception:
+            result[1].append(date_text)
+    return result
+
+print(validate_dates(dates))
+
 # 💣 Zadanie 8 — Najbliższe wydarzenie
-# Dane
-# events = [
-#     ("Meeting", "2025-06-10 12:00"),
-#     ("Lunch", "2025-05-01 13:00"),
-#     ("Conference", "2025-07-20 09:00")
-# ]
 # Wymagania
 # Napisz funkcję:
 # def next_event(events):
 # która zwróci najbliższe wydarzenie w przyszłości względem datetime.now().
+
+events = [
+    ("Meeting", "2025-06-10 12:00"),
+    ("Lunch", "2025-05-01 13:00"),
+    ("Conference", "2025-07-20 09:00")
+]
+
+def next_event(events):
+    pass
 
 # 💣 Zadanie 9 — Grupowanie wydarzeń po dniu
 # Dane
