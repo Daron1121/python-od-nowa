@@ -531,21 +531,29 @@ print(validate_dates(dates))
 # która zwróci najbliższe wydarzenie w przyszłości względem datetime.now().
 
 events = [
-    ("Meeting", "2025-06-10 12:00"),
-    ("Lunch", "2025-05-01 13:00"),
-    ("Conference", "2025-07-20 09:00")
+    ("Meeting", "2026-02-10 12:00"),
+    ("Lunch", "2026-04-01 13:00"),
+    ("Conference", "2026-03-20 09:00")
 ]
 
+print(50 * '-')
+
 def next_event(events):
-    pass
+    now = datetime.now()
+    to_return = None
+    current_best = None
+    for event in events:
+        e = datetime.strptime(event[1], '%Y-%m-%d %H:%M')
+
+        if now < e:
+            if to_return is None  or e < current_best:
+                to_return = event
+                current_best = e
+        
+    return to_return
+print(next_event(events))
 
 # 💣 Zadanie 9 — Grupowanie wydarzeń po dniu
-# Dane
-# events = [
-# ("Meeting", "2025-06-01 10:00"),
-# ("Lunch", "2025-06-01 13:00"),
-# ("Workshop", "2025-06-02 09:00")
-# ]
 # Wymagania
 # Napisz funkcję:
 # def group_by_day(events):
@@ -556,6 +564,19 @@ def next_event(events):
 # }
 # 📌 użyj .date() z datetime.
 
+events = [
+    ("Meeting", "2025-06-01 10:00"),
+    ("Lunch", "2025-06-01 13:00"),
+    ("Workshop", "2025-06-02 09:00")
+]
+
+def group_by_day(events):
+    dates = {}
+    for name, date_str in events:
+        current = datetime.strptime(date_str, '%Y-%m-%d %H:%M').date()
+        dates.setdefault(str(current), []).append(name)
+    return dates
+print(group_by_day(events))
 # 💣 Zadanie 10 — Advanced Time Analyzer (HARD)
 # Dane
 # logs = [
