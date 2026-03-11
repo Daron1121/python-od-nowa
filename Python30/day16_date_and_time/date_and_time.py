@@ -577,13 +577,8 @@ def group_by_day(events):
         dates.setdefault(str(current), []).append(name)
     return dates
 print(group_by_day(events))
+
 # 💣 Zadanie 10 — Advanced Time Analyzer (HARD)
-# Dane
-# logs = [
-# ("Alice", "2025-06-01 09:00", "2025-06-01 17:00"),
-# ("Bob", "2025-06-01 10:30", "2025-06-01 18:00"),
-# ("Alice", "2025-06-02 09:15", "2025-06-02 16:30")
-# ]
 # Wymagania
 # Napisz funkcję:
 # def analyze_work_time(logs):
@@ -598,6 +593,28 @@ print(group_by_day(events))
 # użyj timedelta
 # konwersja na godziny
 
+logs = [
+("Alice", "2025-06-01 09:00", "2025-06-01 17:00"),
+("Bob", "2025-06-01 10:30", "2025-06-01 18:00"),
+("Alice", "2025-06-02 09:15", "2025-06-02 16:30")
+]
+
+def analyze_work_time(logs):
+    personal_work_time = {}
+    for person, start, end  in logs:
+        poczatek = datetime.strptime(start, '%Y-%m-%d %H:%M')
+        koniec = datetime.strptime(end, '%Y-%m-%d %H:%M')
+        przepracowane = koniec - poczatek
+
+        hours = przepracowane.total_seconds() / 3600
+
+        if person in personal_work_time:
+            personal_work_time[person] += hours
+        else:
+            personal_work_time[person] = hours
+    return personal_work_time
+
+print(analyze_work_time(logs))
 # 💣 Zadanie 11 — Overlap Checker (Senior level)
 # Dane
 # meetings = [
