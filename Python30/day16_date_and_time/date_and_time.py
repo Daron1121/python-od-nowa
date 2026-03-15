@@ -615,26 +615,37 @@ def analyze_work_time(logs):
     return personal_work_time
 
 print(analyze_work_time(logs))
+
 # 💣 Zadanie 11 — Overlap Checker (Senior level)
-# Dane
-# meetings = [
-# ("A", "2025-06-01 10:00", "2025-06-01 11:00"),
-# ("B", "2025-06-01 10:30", "2025-06-01 11:30"),
-# ("C", "2025-06-01 12:00", "2025-06-01 13:00")
-# ]
 # Wymagania
 # Napisz funkcję:
 # def detect_overlaps(meetings):
 # która zwróci wszystkie pary spotkań które się nakładają.
 
+meetings = [
+("A", "2025-06-01 10:00", "2025-06-01 11:00"),
+("B", "2025-06-01 10:30", "2025-06-01 11:30"),
+("C", "2025-06-01 12:00", "2025-06-01 13:00")
+]
+def detect_overlaps(meetings):
+    repeating = []
+    for i in range(len(meetings)):
+        for j in range(i + 1, len(meetings)):
+            meeting1, start1, end1 = meetings[i]
+            meeting2, start2, end2 = meetings[j]
+
+            start1 = datetime.strptime(start1, '%Y-%m-%d %H:%M')
+            end1 = datetime.strptime(end1, '%Y-%m-%d %H:%M')
+            start2 = datetime.strptime(start2, '%Y-%m-%d %H:%M')
+            end2 = datetime.strptime(end2, '%Y-%m-%d %H:%M')
+
+            if start1 < end2 and start2 < end1:
+                repeating.append((meeting1, meeting2))
+                
+    return repeating
+
+print(detect_overlaps(meetings))
 # 💣 Zadanie 12 — Real World Log Parser (najtrudniejsze)
-# Dane
-# logs = [
-# "2025-06-01 09:00 | LOGIN | Alice",
-# "2025-06-01 09:15 | LOGIN | Bob",
-# "2025-06-01 10:00 | LOGOUT | Alice",
-# "2025-06-01 11:00 | LOGOUT | Bob"
-# ]
 # Wymagania
 # Napisz funkcję:
 # def session_times(logs):
@@ -648,6 +659,17 @@ print(analyze_work_time(logs))
 # datetime
 # timedelta
 # parowanie login / logout
+
+
+logs = [
+"2025-06-01 09:00 | LOGIN | Alice",
+"2025-06-01 09:15 | LOGIN | Bob",
+"2025-06-01 10:00 | LOGOUT | Alice",
+"2025-06-01 11:00 | LOGOUT | Bob"
+]
+
+def session_times(logs):
+    pass
 
 # REAL TASK 1 — Log Analyzer
 # Masz logi:
