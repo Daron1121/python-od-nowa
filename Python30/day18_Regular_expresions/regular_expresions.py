@@ -283,3 +283,160 @@ for match in matches:
 # matches = re.finditer(r"Hello", a)
 # for match in matches:
 #     print(match)
+
+
+#! Kolejne powtorzenie - zadania chat
+print(60*'-')
+
+# 💣 Zadanie 1 — Walidacja formatu (MID)
+# Wymagania
+# Napisz funkcję:
+# która sprawdza czy string jest poprawnym emailem:
+# ✔ zawiera @
+# ✔ ma domenę (.com, .pl, etc.)
+# 📌 użyj:
+# re.match
+# ^ i $
+def is_valid_email(text):
+    print(re.findall(r"\.(com|pl)$", text))
+    if text.count('@') != 1 or not re.search(r"\.(com|pl)$", text):
+        raise ValueError("Your email must contain one '@' and domain!")
+    return f'Valid email {text}' 
+
+print(is_valid_email('filipterelak1@gmail.com'))
+
+
+# 💣 Zadanie 2 — Wyszukiwanie wzorca (MID)
+# Wymagania
+# Napisz funkcję:
+# która zwróci wszystkie liczby z tekstu:
+# "Order 123, price 45"
+# → ["123", "45"]
+# 📌 użyj:
+# re.findall
+# \d+
+text = "Order 123, price 45"
+def find_numbers(text):
+    return re.findall(r'\d+', text)
+
+print(find_numbers(text))
+
+# 💣 Zadanie 3 — Czyszczenie danych (MID+)
+# Wymagania
+# Napisz funkcję:
+# która:
+# usuwa wszystkie znaki specjalne
+# zostawia tylko litery i cyfry
+# 📌 użyj:
+# re.sub
+def clean_text(text):
+    return re.sub(r'[^a-zA-Z1-9]', '' , text)
+print(clean_text('test*123#:test'))
+
+# 💣 Zadanie 4 — Split logów (MID+)
+# Wymagania
+# Masz:
+# "log1|log2|log3"
+# Napisz:
+# def split_logs(text):
+# który podzieli string po |
+# 📌 użyj:
+# re.split
+# escape \|
+text = "log1|log2|log3"
+
+def split_logs(text):
+    return re.split(r'\|', text)
+
+print(split_logs(text))
+
+# 💣 Zadanie 5 — Dopasowanie początku (MID)
+# Wymagania
+# Sprawdź czy tekst zaczyna się od ERROR:
+# def is_error_log(text):
+# 📌 użyj:
+# ^
+# re.match
+
+def is_error_log(text):
+    return re.search(r'^ERROR', text)
+print(is_error_log('ERROR a123'))
+# 💣 Zadanie 6 — Dopasowanie dowolnego znaku (MID)
+# Wymagania
+# Znajdź wszystkie patterny typu:
+# aXc
+# gdzie X to dowolny znak:
+# "abc axc a-c"
+# → ["abc", "axc", "a-c"]
+# 📌 użyj:
+# .
+
+# 💣 Zadanie 7 — Walidacja hasła (MID/HARD)
+# Wymagania
+# Hasło musi:
+# ✔ mieć min 8 znaków
+# ✔ zawierać literę
+# ✔ zawierać cyfrę
+# def validate_password(password):
+# 📌 użyj:
+# +
+# *
+# ?
+
+# 💣 Zadanie 8 — Wyciąganie dat (HARD)
+# Wymagania
+# Z tekstu:
+# "Today is 2025-06-01 and tomorrow 2025-06-02"
+# wyciągnij daty:
+# ["2025-06-01", "2025-06-02"]
+# 📌 użyj:
+# \d{4}-\d{2}-\d{2}
+
+# 💣 Zadanie 9 — Zamiana danych (HARD)
+# Wymagania
+# Zamień wszystkie liczby w tekście na "X":
+# "User 123 bought 45 items"
+# → "User X bought X items"
+# 📌 użyj:
+# re.sub
+
+# 💣 Zadanie 10 — Parser logów (HARD / Data Engineer)
+# Wymagania
+# Masz logi:
+# "2025-06-01 10:00:00 INFO User logged in"
+# Wyciągnij:
+# (datetime, level, message)
+# 📌 użyj:
+# grupowania ()
+# re.search
+
+# 💣 Zadanie 11 — Zaawansowany filtr (HARD+)
+# Wymagania
+# Znajdź wszystkie słowa które:
+# ✔ zaczynają się wielką literą
+# ✔ mają min 4 znaki
+# 📌 użyj:
+# [A-Z]
+# {}
+
+# 💣 Zadanie 12 — Overlap pattern matcher (SENIOR)
+# Wymagania
+# Znajdź wszystkie powtarzające się słowa:
+# "This is is a test test"
+# → ["is", "test"]
+# 📌 użyj:
+# grupowania ()
+# backreference \1
+
+# 💣 Zadanie 13 — Advanced log cleaner (SENIOR / REAL LIFE)
+# Wymagania
+# Masz tekst:
+# "ERROR 2025-06-01 user_id=123 action=login"
+# Usuń:
+# ✔ daty
+# ✔ user_id
+# zostaw:
+# "ERROR action=login"
+# 📌 użyj:
+# re.sub
+# kilku wzorców
