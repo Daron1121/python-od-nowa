@@ -421,7 +421,10 @@ print(digit_changer("User 123 bought 45 items"))
 # 📌 użyj:
 # grupowania ()
 # re.search
-
+def log_parsing(log):
+    result = re.search(r'(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}) ([A-Z]+) (.+)', log)
+    return result.groups()
+print(log_parsing("2025-06-01 10:00:00 INFO User logged in"))
 # 💣 Zadanie 11 — Zaawansowany filtr (HARD+)
 # Wymagania
 # Znajdź wszystkie słowa które:
@@ -430,6 +433,9 @@ print(digit_changer("User 123 bought 45 items"))
 # 📌 użyj:
 # [A-Z]
 # {}
+def word_finder(text):
+    return re.findall(r'([A-Z][a-zA-Z]{3,})', text)
+print(word_finder('Abcde Ad  casdfb Bevwa'))
 
 # 💣 Zadanie 12 — Overlap pattern matcher (SENIOR)
 # Wymagania
