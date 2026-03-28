@@ -359,8 +359,9 @@ print(split_logs(text))
 # re.match
 
 def is_error_log(text):
-    return re.search(r'^ERROR', text)
+    return re.match(r'^ERROR', text)
 print(is_error_log('ERROR a123'))
+
 # 💣 Zadanie 6 — Dopasowanie dowolnego znaku (MID)
 # Wymagania
 # Znajdź wszystkie patterny typu:
@@ -370,6 +371,9 @@ print(is_error_log('ERROR a123'))
 # → ["abc", "axc", "a-c"]
 # 📌 użyj:
 # .
+def patter_recognition(text):
+    return re.findall(r'a.c', text)
+print(patter_recognition("abc axc a-c cba"))
 
 # 💣 Zadanie 7 — Walidacja hasła (MID/HARD)
 # Wymagania
@@ -377,11 +381,13 @@ print(is_error_log('ERROR a123'))
 # ✔ mieć min 8 znaków
 # ✔ zawierać literę
 # ✔ zawierać cyfrę
-# def validate_password(password):
-# 📌 użyj:
-# +
-# *
-# ?
+
+def validate_password(password):
+    if re.search(r'^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$', password):
+        print(True)
+    else:
+        print(False)
+print(validate_password('Password1'))
 
 # 💣 Zadanie 8 — Wyciąganie dat (HARD)
 # Wymagania
@@ -391,6 +397,9 @@ print(is_error_log('ERROR a123'))
 # ["2025-06-01", "2025-06-02"]
 # 📌 użyj:
 # \d{4}-\d{2}-\d{2}
+def date_finder(text):
+    return re.findall(r'\d{4}-\d{2}-\d{2}', text)
+print(date_finder("Today is 2025-06-01 and tomorrow 2025-06-02"))
 
 # 💣 Zadanie 9 — Zamiana danych (HARD)
 # Wymagania
@@ -399,6 +408,9 @@ print(is_error_log('ERROR a123'))
 # → "User X bought X items"
 # 📌 użyj:
 # re.sub
+def digit_changer(text):
+    return re.sub(r'\d+', 'X', text)
+print(digit_changer("User 123 bought 45 items"))
 
 # 💣 Zadanie 10 — Parser logów (HARD / Data Engineer)
 # Wymagania
