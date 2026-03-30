@@ -437,7 +437,7 @@ def word_finder(text):
     return re.findall(r'([A-Z][a-zA-Z]{3,})', text)
 print(word_finder('Abcde Ad  casdfb Bevwa'))
 
-# 💣 Zadanie 12 — Overlap pattern matcher (SENIOR)
+# 💣 Zadanie 12 — Overlap patter n matcher (SENIOR)
 # Wymagania
 # Znajdź wszystkie powtarzające się słowa:
 # "This is is a test test"
@@ -445,6 +445,9 @@ print(word_finder('Abcde Ad  casdfb Bevwa'))
 # 📌 użyj:
 # grupowania ()
 # backreference \1
+def overlap_pattern(text):
+    return re.findall(r'(\w+) \1', text)
+print(overlap_pattern("This is is a test test"))
 
 # 💣 Zadanie 13 — Advanced log cleaner (SENIOR / REAL LIFE)
 # Wymagania
@@ -458,3 +461,6 @@ print(word_finder('Abcde Ad  casdfb Bevwa'))
 # 📌 użyj:
 # re.sub
 # kilku wzorców
+def log_cleaner(log):
+    return re.sub(r'\d{4}-\d{2}-\d{2}|\s*user_id=\d+', '', log)
+print(log_cleaner("ERROR 2025-06-01 user_id=123 action=login"))
