@@ -103,6 +103,8 @@ print('Attribute:', root.attrib)
 for child in root:
     print('field: ', child.tag)
 
+print(100*'-')
+
 #--------------------------------------------------
 #*Exercises
 #--------------------------------------------------
@@ -246,3 +248,45 @@ print(count_lines('./data/hacker_news.csv', 'python'))
 print(count_lines('./data/hacker_news.csv', 'javascript'))
 # c) Count the number lines containing Java and not JavaScript
 print(count_lines('./data/hacker_news.csv', 'java', 'javascript'))
+
+#--------------------------------------------------
+#*Exercises PART 2 
+#--------------------------------------------------
+
+#* Exercises: Level 1
+# 1 Write a function which count number of lines and number of words in a text. All the files are in the data the folder:
+# - Read obama_speech.txt file and count number of lines and words
+# - Read michelle_obama_speech.txt file and count number of lines and words
+# - Read donald_speech.txt file and count number of lines and words
+# - Read melina_trump_speech.txt file and count number of lines and words
+def num_of_lines(file1):
+    with open(file1, 'r', encoding='utf-8') as f:
+        lines = 0
+        words = 0
+        
+        for line_obj in f:
+            lines += 1
+            words += len(line_obj.split())
+        return f"There are {lines} lines and {words} words"
+print(num_of_lines('data/obama_speech.txt'))
+print(num_of_lines('data/michelle_obama_speech.txt'))
+print(num_of_lines('data/donald_speech.txt'))
+print(num_of_lines('data/melina_trump_speech.txt'))
+
+# 2 Read the countries_data.json data file in data directory, create a function that finds the ten most spoken languages
+# 3 Read the countries_data.json data file in data directory, create a function that creates a list of the ten most populated countries
+
+#* Exercises: Level 2
+# 1 Extract all incoming email addresses as a list from the email_exchange_big.txt file.
+# 2 Find the most common words in the English language. Call the name of your function find_most_common_words, it will take two parameters - a string or a file and a positive integer, indicating the number of words. Your function will return an array of tuples in descending order. Check the output
+# 3 Use the function, find_most_frequent_words to find:
+# - The ten most frequent words used in Obama's speech
+# - The ten most frequent words used in Michelle's speech
+# - The ten most frequent words used in Trump's speech
+# - The ten most frequent words used in Melina's speech
+# 4 Write a python application that checks similarity between two texts. It takes a file or a string as a parameter and it will evaluate the similarity of the two texts. For instance check the similarity between the transcripts of Michelle's and Melina's speech. You may need a couple of functions, function to clean the text(clean_text), function to remove support words(remove_support_words) and finally to check the similarity(check_text_similarity). List of stop words are in the data directory
+# 5 Find the 10 most repeated words in the romeo_and_juliet.txt
+# 6 Read the hacker news csv file and find out:
+# - Count the number of lines containing python or Python
+# - Count the number lines containing JavaScript, javascript or Javascript
+# - Count the number lines containing Java and not JavaScript
