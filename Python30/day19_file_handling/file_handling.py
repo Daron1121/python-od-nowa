@@ -274,10 +274,33 @@ print(num_of_lines('data/donald_speech.txt'))
 print(num_of_lines('data/melina_trump_speech.txt'))
 
 # 2 Read the countries_data.json data file in data directory, create a function that finds the ten most spoken languages
+def most_spoken_languages_2(file1):
+    with open(file1, 'r', encoding='utf-8') as f:
+        data = json.load(f)
+        most_spoken = {}
+        for every in data:
+            for lang in every['languages']:
+                most_spoken[lang] = most_spoken.get(lang, 0) + 1
+        sortedl = sorted(most_spoken.items(), key=lambda x: x[1], reverse=True)
+        return sortedl[:10]
+print(most_spoken_languages_2('data/countries_data.json'))
+
 # 3 Read the countries_data.json data file in data directory, create a function that creates a list of the ten most populated countries
+def most_populated(file1):
+    with open(file1, 'r', encoding='utf-8') as f:
+        data = json.load(f)
+        most_populated = {}
+        for every in data:
+            most_populated[every['name']] = every['population']
+        sortedl = sorted(most_populated.items(), key= lambda x: x[1], reverse=True)
+        return sortedl[:10]
+print(most_populated('data/countries_data.json'))
 
 #* Exercises: Level 2
 # 1 Extract all incoming email addresses as a list from the email_exchange_big.txt file.
+with open('data/email_exchanges_big.txt', 'r', encoding='utf-8') as f:
+    emails = set(re.findall(r'From:\s*([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})', f.read()))
+print(emails)
 # 2 Find the most common words in the English language. Call the name of your function find_most_common_words, it will take two parameters - a string or a file and a positive integer, indicating the number of words. Your function will return an array of tuples in descending order. Check the output
 # 3 Use the function, find_most_frequent_words to find:
 # - The ten most frequent words used in Obama's speech
